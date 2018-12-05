@@ -1,0 +1,136 @@
+body{
+	font-family: 'Roboto', sans-serif;
+	background:#fff;
+}
+
+.logo{
+    float:left;
+	width: 10%;
+}
+
+.cssmenu {
+	margin-top: 10px;
+	position: relative;
+	width: 40.5%;
+    float: left;
+    margin-left:400px;
+}
+
+.buttons{
+    float:right;
+    position: relative;
+	width:26.5%;
+	margin-top: 1px;
+}		
+.login_btn{
+	float:left;
+	margin-right:5px;
+}
+
+.findEvent{
+    width: 100%;
+}
+
+.card{
+    margin: 20px 0;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: 0.3s ease;
+}
+
+.eventTitle{
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.time{
+    color: rgb(121, 121, 121);
+    font-size: 0.8em;
+    margin: 3px 0;
+}
+.place{
+    color: rgb(121, 121, 121);
+    font-size: 0.8em;
+    margin: 3px 0;
+}
+
+.status_ticket{
+    color: rgb(8, 8, 8);
+    font-size: 0.9em;
+    margin: 3px 0;
+}
+
+.day{
+    text-align: center;
+    font-size: 1.3em;
+    color: rgb(121, 121, 121);
+}
+
+.month{ 
+    text-align: center;
+    font-size: 1.1em;
+    color: red;
+}
+
+.judulLogin{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.85em;
+}
+
+.login .col-md-4 p{
+    text-align: center;
+    color: rgb(121, 121, 121);
+    font-size: 0.9em;
+    margin-top: 7px;
+} 
+
+center{
+    text-align: center;
+    color: rgb(121, 121, 121);
+    font-size: 0.9em;
+    margin-top: 7px;
+}
+
+.descEvent .col-8{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 30px 100px;
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+.descEvent .judulEvent{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.7em;
+}
+
+.descEvent .by{
+    text-align: center;
+    color: rgb(121, 121, 121);
+    margin: 15px 0;
+    font-size: 1em;
+}
+
+.descEvent .waktu_lokasi_desc{
+    font-weight: bold;
+    font-size: 0.8em;
+    margin: 15px 0;
+}
+
+.descEvent .timeEvent{
+    font-size: 1em;
+    color: rgb(121, 121, 121);
+    margin-left: 20px;
+    margin-bottom: 15px;    
+}
+
+.deskripsi{
+    font-size: 16px;
+    color: rgb(78, 78, 78);
+}
+
