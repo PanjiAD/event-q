@@ -8,28 +8,31 @@ if (!empty($_POST["username"]) || !empty($_POST["password"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $query = "SELECT * FROM users WHERE username = '$username' AND pass = '$password'";
+    $query = "SELECT * FROM users WHERE username = '$username' OR email = '$username' AND pass = '$password'";
     $result = mysqli_query($con, $query);
 
     if(mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
+        $idkategori = $row["id_users"];
         $level = $row["idusers_level"];
 
         if($level == 1) {
             $_SESSION["username"] = $username;
             $_SESSION["idusers_level"] = $level;
+            $_SESSION["id_users"] = $idkategori;
             header("Location: ../indexAdmin.php");
         } 
         else {
             $_SESSION["username"] = $username;
             $_SESSION["idusers_level"] = $level;
-            header("Location: ../indexLogin.php");
+            $_SESSION["id_users"] = $idkategori;
+            header("Location: ../indexUser.php");
         }
     } 
     else{
         $error = urldecode("Username atau Password tidak valid");
-        header("Location: ../login.php?pesan=$error");
     }
+    header("Location: ../login.php?pesan=$error");
 
     mysqli_close($con);
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-    <?php include 'helper/koneksi.php'?>    
+<html> 
 <head>
     <title>Page Title</title>
     <?php include 'head.php'?>  
@@ -12,7 +11,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <h2 class="judulLogin">Let's Get Register</h2>
-                <form>
+                <form class="formRegister" action="proses/userRegister.php" method="POST">
                     <div class="form-group mt-4">
                         <label for="nama" class="mb-2">Nama Lengkap</label>
                         <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama lengkapmu" required>

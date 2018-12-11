@@ -1,7 +1,22 @@
+<?php
+
+include 'helper/koneksi.php';
+
+$id_events = $_GET["id"]; 
+
+$query = "SELECT * FROM events WHERE id_events = $id_events";
+	$result = mysqli_query($con, $query);
+	
+	$item = ''; 
+	if(mysqli_num_rows($result) == 1) {
+	    $event = mysqli_fetch_assoc($result);
+	} else {
+	    echo "Event tidak ditemukan";
+	}
+?>
+
 <!DOCTYPE html>
 <html>
-
-<?php include 'helper/koneksi.php'?>
 
 <head>
     <title>Page Title</title>
@@ -14,23 +29,33 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 mt-4">
-                <h2 class="judulEvent">Trip to BROMO</h2>
+                <h2 class="judulEvent"><?php echo $event['judul_event']; ?> </h2>
                 <p class="by">Dipublikasi oleh Fulan</p>
-                <img src="gambar/bromo.jpg" style="width:100%"/>
-                <div class="row">
+                <?php echo"<img class='card-img-top' src='gambar/" .$event['gambar_event']."' alt='Card image cap'>"?>
+                <div class="row">   
                     <div class="col-md-6">
                         <label class="mb-2 waktu_lokasi_desc">Tanggal dan Waktu</label>
-                        <p class="timeEvent">Sab, Jas 20, 10.00 WIB - </br>Sen, Jan 22, 12.00 WIB</p>
+                        <p class="timeEvent"><?php echo $event['tanggal_mulai']; ?>, <?php echo $event['waktu_mulai']; ?> WIB - </br><?php echo $event['tanggal_akhir']; ?>, <?php echo $event['waktu_akhir']; ?> WIB </br> <label class="waktu_lokasi_desc" style="margin:0; color:black">Tiket : 
+                        <?php
+                            if ($event['harga'] == 0) {
+                                echo 'free';
+                            }
+                            else{
+                                echo $event['harga'];	
+                            }
+                        ?></label></p>
+                        
                     </div>
                     <div class="col-md-6 "> 
                         <label class="mb-2 waktu_lokasi_desc">Lokasi</label>
-                        <p class="peta"> <a href="https://goo.gl/maps/xM9Svm1hEyR2"> https://goo.gl/maps/xM9Svm1hEyR2 </a></p> 
-                        <label class="waktu_lokasi_desc">Tiket : Free</label>
+                        <p class="place"> <?php echo $event['lokasi']; ?></p>
+                        <p class="peta"> <a href="<?php echo $event['urls']; ?>"> Lihat Peta </a></p> 
+                        
                     </div>
                 </div>
                 <h4 class="waktu_lokasi_desc">Deskripsi</h4>
                 <p class="deskripsi">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. </br>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. </br>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</br> Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. </br>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. </br>Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </br>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. </br>Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
+                <?php echo $event['deskripsi']; ?>
                 </p>
                 <input type="submit" value="Registrasi" class="btn btn-success btn-block mt-4">
             </div>

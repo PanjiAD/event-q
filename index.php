@@ -1,8 +1,28 @@
+<?php
+	include 'helper/koneksi.php';
+	session_start();
+	// session_destroy();
+
+    if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
+		if ($_SESSION['idusers_level'] == '1') {
+            header("location: indexAdmin.php");
+        }
+        else{
+            header("location: indexUser.php");
+        }
+	}
+    if (isset($_GET['pesan'])) {
+        $mess = "<p> {$_GET['pesan']}</p>";
+    }
+    else{
+        $mess = " ";
+	}; 
+
+	
+?>
+
 <!DOCTYPE html>
 <html>
-
-<?php include 'helper/koneksi.php'?>
-
 <head>
     <title>Booking Event</title>
     <?php include 'head.php'?>
@@ -22,7 +42,7 @@
 					<div class="col-4">
 						<label for="lokasi" class="mb-2" style="font-style:bold">Kategori</label>
 						<div class="dropdown">
-  							<button class="btn dropdown-toggle" type="button" id="kategori" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategori
+  							<button class="btn dropdown-toggle btn-block" type="button" id="kategori" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategori
  							</button>
  							<div class="dropdown-menu" aria-labelledby="tanggal">
  							  <button class="dropdown-item" type="button">Action</button>
@@ -50,134 +70,48 @@
 
 	<div class="container anyEvent">
 		<div class="row">
-			<div class="col-4">
-				<div class="card" style="width: 22rem;">
-  					<img class="card-img-top" src="gambar/bromo.jpg" alt="Card image cap">
-  					<div class="card-body">
-  					  	<div class="row">
-							<div class="col-3">
-								<p class="month">Jan</p>
-								<p class="day">20</p>
-							</div>
-							<div class="col-9">
-								<div class="eventTitle">
-									<h2>Trip to BROMO 2018</h2>
+				<?php
+					$query = "SELECT * FROM events";
+					$result = mysqli_query($con, $query);
+
+					if(mysqli_num_rows($result) > 0){
+					$card = 1;
+					while($row = mysqli_fetch_assoc($result)){
+					$id_events = $row["id_events"];
+					?>
+					<div class="col-4">
+					<div class="card" style="width: 22rem;">
+					<?php echo" <a href='detailEvent.php?id=$id_events'><img class='card-img-top' src='gambar/" .$row['gambar_event']."' alt='Card image cap'></a>"?>
+  						<div class="card-body">
+  						  	<div class="row">
+								<div class="col-3">
+									<p class="month">Jan</p>
+									<p class="day">20</p>
 								</div>
-								<p class="time">Sab, Jas 20, 10.00 WIB</p>
-								<p class="place"> Jl Semanggi barat, Malang, Jawa Timur</p>
-								<p class="status_ticket">Free</p>
-							</div>	
-						</div>
-  					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card" style="width: 22rem;">
-  					<img class="card-img-top" src="gambar/bromo.jpg" alt="Card image cap">
-  					<div class="card-body">
-  					  	<div class="row">
-							<div class="col-3">
-								<p class="month">Jan</p>
-								<p class="day">20</p>
+								<div class="col-9">
+									<div class="eventTitle">
+										<h2> <?php echo $row['judul_event']; ?> </h2>
+									</div>
+									<p class="time"><?php echo $row['tanggal_mulai']; ?>, <?php echo $row['waktu_mulai']; ?></p>
+									<p class="place"> <?php echo $row['lokasi']; ?> </p>
+									<p class="status_ticket"><?php 
+									if ($row['harga'] == 0) {
+										echo 'free';
+									}
+									else{
+										echo $row['harga'];	
+									}
+									 ?> </p>
+								</div>	
 							</div>
-							<div class="col-9">
-								<div class="eventTitle">
-									<h2>Trip to BROMO 2018</h2>
-								</div>
-								<p class="time">Sab, Jas 20, 10.00 WIB</p>
-								<p class="place"> Jl Semanggi barat, Malang, Jawa Timur</p>
-								<p class="status_ticket">Free</p>
-							</div>	
-						</div>
-  					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card" style="width: 22rem;">
-  					<img class="card-img-top" src="gambar/bromo.jpg" alt="Card image cap">
-  					<div class="card-body">
-  					  	<div class="row">
-							<div class="col-3">
-								<p class="month">Jan</p>
-								<p class="day">20</p>
-							</div>
-							<div class="col-9">
-								<div class="eventTitle">
-									<h2>Trip to BROMO 2018</h2>
-								</div>
-								<p class="time">Sab, Jas 20, 10.00 WIB</p>
-								<p class="place"> Jl Semanggi barat, Malang, Jawa Timur</p>
-								<p class="status_ticket">Free</p>
-							</div>	
-						</div>
-  					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-4">
-				<div class="card" style="width: 22rem;">
-  					<a href="detailEvent.php"><img class="card-img-top" src="gambar/bromo.jpg" alt="Card image cap"></a>
-  					<div class="card-body">
-  					  	<div class="row">
-							<div class="col-3">
-								<p class="month">Jan</p>
-								<p class="day">20</p>
-							</div>
-							<div class="col-9">
-								<div class="eventTitle">
-									<h2>Trip to BROMO 2018</h2>
-								</div>
-								<p class="time">Sab, Jas 20, 10.00 WIB</p>
-								<p class="place"> Jl Semanggi barat, Malang, Jawa Timur</p>
-								<p class="status_ticket">Free</p>
-							</div>	
-						</div>
-  					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card" style="width: 22rem;">
-  					<img class="card-img-top" src="gambar/bromo.jpg" alt="Card image cap">
-  					<div class="card-body">
-  					  	<div class="row">
-							<div class="col-3">
-								<p class="month">Jan</p>
-								<p class="day">20</p>
-							</div>
-							<div class="col-9">
-								<div class="eventTitle">
-									<h2>Trip to BROMO 2018</h2>
-								</div>
-								<p class="time">Sab, Jas 20, 10.00 WIB</p>
-								<p class="place"> Jl Semanggi barat, Malang, Jawa Timur</p>
-								<p class="status_ticket">Free</p>
-							</div>	
-						</div>
-  					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card" style="width: 22rem;">
-  					<img class="card-img-top" src="gambar/bromo.jpg" alt="Card image cap">
-  					<div class="card-body">
-  					  	<div class="row">
-							<div class="col-3">
-								<p class="month">Jan</p>
-								<p class="day">20</p>
-							</div>
-							<div class="col-9">
-								<div class="eventTitle">
-									<h2>Trip to BROMO 2018</h2>
-								</div>
-								<p class="time">Sab, Jas 20, 10.00 WIB</p>
-								<p class="place"> Jl Semanggi barat, Malang, Jawa Timur</p>
-								<p class="status_ticket">Free</p>
-							</div>	
-						</div>
-  					</div>
-				</div>
-			</div>
+  						</div>
+					</div>
+					</div>
+				<?php		
+					}
+				}
+				mysqli_close($con); 
+				?>
 		</div>
 		<div class="row">
 			<div class="col-4"></div>
@@ -190,3 +124,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.js"></script>
 </body>
 </html>
+				
+

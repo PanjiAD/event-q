@@ -3,14 +3,16 @@
 
 	<?php
     session_start();
+    // session_destroy();
 
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
+		
         if ($_SESSION['idusers_level'] == '1') {
             header("location: indexAdmin.php");
         }
-        else{
-            header("location: indexLogin.php");
-        }
+        else if ($_SESSION['idusers_level'] == '2'){
+            header("location: indexUser.php");
+		}
     }
 
     if (isset($_GET['pesan'])) {
@@ -50,6 +52,7 @@
 					<center>Belum punya akun EventHits ? <a href="register.php">Daftar</a></center> 
 				</form>
 			</div>
+			
 			<div class="col-md-4"></div>
 		</div>	
 	</div>

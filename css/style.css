@@ -32,6 +32,11 @@ body{
 	font-family: 'Dosis', sans-serif;
 	background:#fff;
 }
+
+
+.nav-item img{
+    width: 100px;
+}
 .wrap{
 	width:80%;
 	margin:0 auto;
