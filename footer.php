@@ -1,6 +1,5 @@
-<div class="footer">
+<div class="footer mt-4">
 		<div class="wrap">
-			
 			<div class="footer-bottom">
 				<div class="copy">
 					<p>© 2014 Template by <a href="http://w3layouts.com" target="_blank"> w3layouts</a></p>

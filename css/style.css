@@ -37,6 +37,7 @@ body{
 .nav-item img{
     width: 100px;
 }
+
 .wrap{
 	width:80%;
 	margin:0 auto;
@@ -44,6 +45,7 @@ body{
 	-webkit-transition:all .2s linear; 
 	-o-transition:all .2s linear; 
 	-ms-transition:all .2s linear;
+
 }
 .header-top{
 	background:#333;

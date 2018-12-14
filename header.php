@@ -7,7 +7,7 @@
 	if ($level == 1) {
 ?>
 	<div class="header-top">
-	<div class="wrap">
+	<div class="wrap" style="display:flex; align-items: center">
 		<div class="logo">
 			<a href="index.php"><img src="gambar/eventcinemas-logo.png" alt="" /></a>
 		</div>
@@ -52,11 +52,12 @@
 	} else if($level == 2){
 ?>
 	<div class="header-top">
-	<div class="wrap">
+	<div class="wrap"> 
 		<div class="logo">
 			<a href="index.php"><img src="gambar/eventcinemas-logo.png" alt="" /></a>
 		</div>
 		<div class="cssmenu">
+		
 			<nav class="navbar navbar-expand-sm">
 					<div class="collapse navbar-collapse" id="collapsibleNavId">
 					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -70,11 +71,15 @@
 							<a class="nav-link" href="addEvent.php">Buat Acara</a>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="akun" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="gambar/business-man.png"/> Panji Awwaludi D </a>
+							<a class="nav-link dropdown-toggle" href="#" id="akun" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="gambar/business-man.png"/>
+							<?php
+								echo $_SESSION['username'];
+							?>
+							</a>
 							<div class="dropdown-menu" aria-labelledby="dropdownId">
 								<a class="dropdown-item" href="#">Akun</a>
-								<a class="dropdown-item" href="#">Tiket</a>
-								<a class="dropdown-item" href="#">Kelola Event</a>
+								<a class="dropdown-item" href="tiket.php">Tiket</a>
+								<a class="dropdown-item" href="myEvent.php">Kelola Event</a>
 								<a class="dropdown-item" href="logout.php">Log Out</a>
 							</div>
 						</li>

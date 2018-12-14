@@ -1,23 +1,16 @@
 <?php
-	include 'helper/koneksi.php';
-
+    include '../helper/koneksi.php';
 	session_start();
 	// session_destroy();
 
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-		if($_SESSION['idusers_level'] == '2'){
-			header("location: ../indexUser.php");	
-		}
+        if ($_SESSION['idusers_level'] == '2') {
+            header("location: ../indexUser.php");
+        }
+        else if ($_SESSION['idusers_level'] == '') {
+            header("location: ../index.php");
+        }
 	}
-	else {
-		header("location: ../login.php");
-	}
-    // if (isset($_GET['pesan'])) {
-    //     $mess = "<p> {$_GET['pesan']}</p>";
-    // }
-    // else{
-    //     $mess = " ";
-    // };
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -127,21 +120,17 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Dashboard</h4>
+                            <h4 class="page-title pull-left">Tables</h4>
                             <ul class="breadcrumbs pull-left">
                                 <!-- <li><a href="index.html">Home</a></li> -->
-                                <li><span>Dashboard</span></li>
+                                <li><span>User</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-                            <?php
-								echo $_SESSION['username'];
-							?> 
-                            <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
                             </div>
@@ -150,7 +139,64 @@
                 </div>
             </div>
             <!-- page title area end -->
-            
+            <div class="container">
+                <h3 class="text-center mt-4">Data User</h3>
+                <?php
+                $message = '';
+                if(isset($_GET["error"])){
+                    $message = $_GET["error"];
+                    echo " <p style='color:red; font-style:italic'>$message</p>";
+                }
+                ?>
+                <a href="formAddUser.php" class="btn btn-success mt-2 mb-3" enctype="multipart/form-data">Tambah User</a>
+                <!-- <div class="row"> -->
+                    <table id="barang" class="table table-stripped tex-center-mt-3" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Gambar_Profil</th>
+                                <th>Tanggal_Pembuatan</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $query = "SELECT * FROM users WHERE deleted = 0";
+                            $result = mysqli_query($con, $query);
+
+                            if (mysqli_num_rows($result) > 0){
+                                $index = 1; 
+                                while($row = mysqli_fetch_assoc($result)){
+                                    $id_users = $row["id_users"];
+                                    echo "
+                                    <tr>
+                                    <td>" . $index++ . "</td>
+                                    <td>" .$row["nama"]. "</td>
+                                    <td>" .$row["username"]. "</td>
+                                    <td>" .$row["pass"]. "</td>
+                                    <td>" .$row["email"]. "</td>
+                                    <td> <img src='../gambar/".$row['gambar_profile']."' style='width:100px;'> </td>
+                                    <td>" .$row["create_date"]. "</td>
+                                    <td>
+                                        <a href='formUpdateUser.php?id=$id_users
+                                        ' class='btn btn-warning'>Update</a>
+                                        <a href='../proses/admin/deleteUser.php?id=$id_users
+                                        ' class='btn btn-danger'>Delete</a>
+                                        </td>
+                                    </tr>
+                                 ";
+                                }
+                            }
+                            mysqli_close($con); 
+                            ?>
+                        </tbody>
+                    </table>
+                <!-- </div> -->
+            </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->

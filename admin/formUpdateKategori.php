@@ -1,23 +1,19 @@
 <?php
-	include 'helper/koneksi.php';
-
+    include '../helper/koneksi.php';
 	session_start();
 	// session_destroy();
 
-    if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-		if($_SESSION['idusers_level'] == '2'){
-			header("location: ../indexUser.php");	
-		}
-	}
-	else {
-		header("location: ../login.php");
-	}
-    // if (isset($_GET['pesan'])) {
-    //     $mess = "<p> {$_GET['pesan']}</p>";
-    // }
-    // else{
-    //     $mess = " ";
-    // };
+    $id_kategori = $_GET["id"]; 
+
+    $query = "SELECT * FROM kategori WHERE id_kategori = $id_kategori";
+    $result = mysqli_query($con, $query);
+
+    // $item = ''; 
+    if(mysqli_num_rows($result) == 1) {
+        $kategori = mysqli_fetch_assoc($result);
+    } else {
+        echo "User tidak ditemukan";
+    }
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -127,21 +123,18 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Dashboard</h4>
+                            <h4 class="page-title pull-left">Tables</h4>
                             <ul class="breadcrumbs pull-left">
                                 <!-- <li><a href="index.html">Home</a></li> -->
-                                <li><span>Dashboard</span></li>
+                                <li><a href="kategoriAdmin.php">Kategori </a></li>
+                                <li><span> Update Kategori</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-                            <?php
-								echo $_SESSION['username'];
-							?> 
-                            <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
                             </div>
@@ -150,7 +143,49 @@
                 </div>
             </div>
             <!-- page title area end -->
-            
+            <div class="container">
+            <h3 class="mt-3 text-center">Update Kategori</h3>
+            <div class="row mt-5">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+
+                    <!-- We add value form query result to inputs -->
+
+                    <form action="../proses/admin/updateKategori.php" method="POST" enctype="multipart/form-data">
+                        
+                        <!-- 
+                            We still need id_barang to inform update query command
+                            User doesn't need to know the id_barang, so make it hidden
+                        -->
+                        <input type="hidden" name="idKategori" value="<?php echo $kategori["id_kategori"] ?>">
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Jenis Kateogri</label>
+                            <div class="col-md-9">
+                                <input type="text" name="nama" class="form-control" placeholder="Nama Kategori"  
+                                value="<?php echo $kategori["jenis_kategori"] ?>">       
+                            </div>                     
+                        </div>
+                        <div class="form-group row mt-5">
+                            <div class="col-md-4">
+                                <!-- Back to home -->
+                                <a name="backBtn" id="backBtn" class="btn btn-dark btn-block" href="kategoriAdmin.php" role="button">Kembali</a>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- Clear form value using JS. Please check clearForm function -->
+                                <button name="clearFormBtn" id="clearFormBtn" class="btn btn-warning btn-block" role="button" onclick="clearForm()">Clear</button>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- Input button to submit form. Please check href attribute -->
+                                <input type="submit" name="tambah" class="btn btn-success btn-block" value="Update"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->

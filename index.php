@@ -1,24 +1,18 @@
+
 <?php
 	include 'helper/koneksi.php';
+
 	session_start();
 	// session_destroy();
 
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-		if ($_SESSION['idusers_level'] == '1') {
-            header("location: indexAdmin.php");
-        }
-        else{
-            header("location: indexUser.php");
-        }
+        if ($_SESSION['idusers_level'] == '1') {
+            header("location: admin/indexAdmin.php");
+		}
+		else if($_SESSION['idusers_level'] == '2'){
+			header("location: indexUser.php");	
+		}
 	}
-    if (isset($_GET['pesan'])) {
-        $mess = "<p> {$_GET['pesan']}</p>";
-    }
-    else{
-        $mess = " ";
-	}; 
-
-	
 ?>
 
 <!DOCTYPE html>
@@ -41,15 +35,20 @@
 					</div>
 					<div class="col-4">
 						<label for="lokasi" class="mb-2" style="font-style:bold">Kategori</label>
-						<div class="dropdown">
-  							<button class="btn dropdown-toggle btn-block" type="button" id="kategori" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategori
- 							</button>
- 							<div class="dropdown-menu" aria-labelledby="tanggal">
- 							  <button class="dropdown-item" type="button">Action</button>
- 							  <button class="dropdown-item" type="button">Another action</button>
- 							  <button class="dropdown-item" type="button">Something else here</button>
- 							</div>
-						</div>
+						<select name="kategori" cols="10" rows="5" class="form-control"> 
+                                    <?php
+                                        $query = "SELECT * FROM kategori WHERE deleted = 0";
+                                        $result = mysqli_query($con, $query);
+                                        if (mysqli_num_rows($result) > 0) {
+                                            $kategori = 1;
+                                            while($row = mysqli_fetch_assoc($result)){
+                                            ?>
+                                                <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?> </option>        
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
 					</div>
 					<div class="col-4">
 					<label for="tanggal" class="mb-2" style="font-style:bold">Tanggal</label>

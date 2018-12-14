@@ -17,9 +17,10 @@ $harga = $_POST["harga"];
 $peserta = $_POST["peserta"];
 $instansi = $_POST["instansi"];
 $kategori = $_POST["kategori"];
-$kategoriacara = $_SESSION["id_users"];
+$id_users = $_SESSION["id_users"];
 
 $date = date('Y-m-d');
+   
 // H:i:s
 $code = $_FILES["file"]["error"];
     if ($code == 0) {
@@ -47,7 +48,8 @@ $code = $_FILES["file"]["error"];
         $error = "Upload gagal";
         header("Location:../addEvent.php?error=$error");
     }
-$query = "INSERT INTO events( judul_event , lokasi , urls , gambar_event , tanggal_mulai , tanggal_akhir , waktu_mulai , waktu_akhir , harga , deskripsi , create_date , nama_penyelenggara , id_users, id_kategori) VALUES ( '$judul_event' , '$lokasi' , '$url' , '$nama_file' , '$tanggal_mulai' , '$tanggal_akhir' , '$waktu_mulai' , '$waktu_akhir' , '$harga' , '$deskripsi' , '$date' , '$instansi' , '$kategoriacara' , '$kategori' )";
+
+$query = "INSERT INTO events( judul_event , lokasi , urls , gambar_event , tanggal_mulai , tanggal_akhir , waktu_mulai , waktu_akhir , harga , peserta, deskripsi , create_date , nama_penyelenggara , id_users, id_kategori) VALUES ( '$judul_event' , '$lokasi' , '$url' , '$nama_file' , '$tanggal_mulai' , '$tanggal_akhir' , '$waktu_mulai' , '$waktu_akhir' , '$harga' , '$peserta', '$deskripsi' , '$date' , '$instansi' , '$id_users' , '$kategori' )";
 
 if(mysqli_query($con, $query)){
     header("Location:../indexUser.php");

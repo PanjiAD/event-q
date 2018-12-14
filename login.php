@@ -8,18 +8,11 @@
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 		
         if ($_SESSION['idusers_level'] == '1') {
-            header("location: indexAdmin.php");
+            header("location: admin/indexAdmin.php");
         }
         else if ($_SESSION['idusers_level'] == '2'){
             header("location: indexUser.php");
 		}
-    }
-
-    if (isset($_GET['pesan'])) {
-        $mess = "<p> {$_GET['pesan']}</p>";
-    }
-    else{
-        $mess = " ";
     }
 ?>
 
@@ -27,7 +20,6 @@
 	<title>EvenHits | Login</title>
 	<?php include 'head.php'?>
 </head>
-
 <body>
 	<?php include 'header.php'?>
 	<div class="container login mt-4">

@@ -12,7 +12,7 @@
         $query = "INSERT INTO users(nama, username, pass, email, create_date, idusers_level) VALUES ('$nama', '$username', '$password', '$email', '$date', 2)";
 
         if(mysqli_query($con, $query)){
-            header("Location:../indexLogin.php");
+            header("Location:../indexUser.php");
         }
         else{
             $error = urldecode("Data tidak berhasil ditambahkan");

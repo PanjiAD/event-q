@@ -1,23 +1,22 @@
 <?php
-	include 'helper/koneksi.php';
-
+    include '../helper/koneksi.php';
 	session_start();
 	// session_destroy();
 
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-		if($_SESSION['idusers_level'] == '2'){
-			header("location: ../indexUser.php");	
-		}
+        if ($_SESSION['idusers_level'] == '2') {
+            header("location: ../indexUser.php");
+        }
+        else if ($_SESSION['idusers_level'] == '') {
+            header("location: ../index.php");
+        }
 	}
-	else {
-		header("location: ../login.php");
-	}
-    // if (isset($_GET['pesan'])) {
-    //     $mess = "<p> {$_GET['pesan']}</p>";
-    // }
-    // else{
-    //     $mess = " ";
-    // };
+    if (isset($_GET['pesan'])) {
+        $mess = "<p> {$_GET['pesan']}</p>";
+    }
+    else{
+        $mess = " ";
+    };
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -127,21 +126,18 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Dashboard</h4>
+                            <h4 class="page-title pull-left">Tables</h4>
                             <ul class="breadcrumbs pull-left">
                                 <!-- <li><a href="index.html">Home</a></li> -->
-                                <li><span>Dashboard</span></li>
+                                <li><a href="kategoriAdmin.php">Kategori </a></li>
+                                <li><span>Tambah Kategori</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-                            <?php
-								echo $_SESSION['username'];
-							?> 
-                            <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
                             </div>
@@ -150,7 +146,28 @@
                 </div>
             </div>
             <!-- page title area end -->
-            
+            <div class="container">
+            <h3 class="mt-2 text-center">Tambah Kategori</h3>
+            <div class="row mt-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <!-- form handling in process/actionAddBarang -->
+                    <form class="formRegister" action="../proses/admin/addKategori.php" method="POST">
+                    
+                            <div class="form-group">
+                            <label for="kategroi" class="mb-2">Jenis Kategori</label>
+                            <input type="text" name="kategori" id="nama" class="form-control" placeholder="Nama Kategori" required>
+                        
+                    </div>
+                    <div class="form-group mb-4 mt-4" >
+                        <input type="submit" value="submit" class="btn btn-success btn-block">
+                    </div>
+                    
+                </form>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->

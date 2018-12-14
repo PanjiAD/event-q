@@ -1,23 +1,17 @@
 <?php
-	include 'helper/koneksi.php';
-
+    include '../helper/koneksi.php';
 	session_start();
 	// session_destroy();
 
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-		if($_SESSION['idusers_level'] == '2'){
-			header("location: ../indexUser.php");	
-		}
-	}
-	else {
-		header("location: ../login.php");
-	}
-    // if (isset($_GET['pesan'])) {
-    //     $mess = "<p> {$_GET['pesan']}</p>";
-    // }
-    // else{
-    //     $mess = " ";
-    // };
+        if ($_SESSION['idusers_level'] == '2') {
+            header("location: ../indexUser.php");
+        }
+        else if ($_SESSION['idusers_level'] == '') {
+            header("location: ../index.php");
+        }
+    }
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -127,21 +121,17 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Dashboard</h4>
+                            <h4 class="page-title pull-left">Tables</h4>
                             <ul class="breadcrumbs pull-left">
                                 <!-- <li><a href="index.html">Home</a></li> -->
-                                <li><span>Dashboard</span></li>
+                                <li>Kategori</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-                            <?php
-								echo $_SESSION['username'];
-							?> 
-                            <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
                             </div>
@@ -150,7 +140,52 @@
                 </div>
             </div>
             <!-- page title area end -->
-            
+            <div class="container">
+                <h3 class="text-center mt-4">Data Kategori</h3>
+                <?php
+                $message = '';
+                if(isset($_GET["error"])){
+                    $message = $_GET["error"];
+                    echo " <p style='color:red; font-style:italic'>$message</p>";
+                }
+                ?>
+                <a href="formAddKategori.php" class="btn btn-success mt-2 mb-3" enctype="multipart/form-data">Tambah Kategori</a>
+                <!-- <div class="row"> -->
+                    <table id="barang" class="table table-stripped tex-center-mt-3" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Jenis Kategori</th>
+                                <th>action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $query = "SELECT * FROM kategori WHERE deleted = 0";
+                            $result = mysqli_query($con, $query);
+
+                            if (mysqli_num_rows($result) > 0){
+                                $index = 1; 
+                                while($row = mysqli_fetch_assoc($result)){
+                                    $id_kategori = $row["id_kategori"];
+                                    echo "
+                                    <tr>
+                                    <td>" . $index++ . "</td>
+                                    <td>" .$row["jenis_kategori"]. "</td>
+                                    <td>
+                                        <a href='formUpdateKategori.php?id=$id_kategori' class='btn btn-warning'>Update</a>
+                                        <a href='../proses/admin/deleteKategori.php?id=$id_kategori' class='btn btn-danger'>Delete</a>
+                                        </td>
+                                    </tr>
+                                 ";
+                                }
+                            }
+                            mysqli_close($con); 
+                            ?>
+                        </tbody>
+                    </table>
+                <!-- </div> -->
+            </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
