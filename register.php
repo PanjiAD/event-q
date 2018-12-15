@@ -11,7 +11,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <h2 class="judulLogin">Let's Get Register</h2>
-                <form class="formRegister" action="proses/userRegister.php" method="POST">
+                <form class="formRegister" action="proses/userRegister.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group mt-4">
                         <label for="nama" class="mb-2">Nama Lengkap</label>
                         <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama lengkapmu" required>
@@ -47,6 +47,13 @@
                             Isikan ulang password
                         </div>
                     </div>
+                    <div class="form-group mt-4">
+                    <label class="mb-2">Foto Profil</label>
+                        <div class="col-md-9">
+                            <input type="file" name="file">
+                        </div>
+                    </div>
+                    
                     <div class="form-group mb-4 mt-4" >
                         <input type="submit" value="submit" class="btn btn-success btn-block">
                     </div>

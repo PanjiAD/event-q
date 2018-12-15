@@ -70,7 +70,7 @@
 	<div class="container anyEvent">
 		<div class="row">
 				<?php
-					$query = "SELECT * FROM events";
+					$query = "SELECT * FROM events WHERE deleted = 0";
 					$result = mysqli_query($con, $query);
 
 					if(mysqli_num_rows($result) > 0){
@@ -98,7 +98,7 @@
 										echo 'free';
 									}
 									else{
-										echo $row['harga'];	
+										echo 'Rp '.$row['harga'];	
 									}
 									 ?> </p>
 								</div>	

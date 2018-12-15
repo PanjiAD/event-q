@@ -71,9 +71,9 @@
                                         $query = "SELECT * FROM kategori WHERE deleted = 0";
                                         $result = mysqli_query($con, $query);
                                         if (mysqli_num_rows($result) > 0) {
-                                            $kategori = 1;
+                                            // $kategori = 1;
                                             while($row = mysqli_fetch_assoc($result)){
-                                            ?>
+                                    ?>
                                                 <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?> </option>        
                                     <?php
                                             }

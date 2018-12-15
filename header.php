@@ -71,9 +71,22 @@
 							<a class="nav-link" href="addEvent.php">Buat Acara</a>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="akun" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="gambar/business-man.png"/>
+							<a class="nav-link dropdown-toggle" href="#" id="akun" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<?php
-								echo $_SESSION['username'];
+								$user = $_SESSION['username'];
+								$query = "SELECT gambar_profile FROM users WHERE username = '$user'";
+								$result = mysqli_query($con, $query);
+
+								if(mysqli_num_rows($result) == 1) {
+									$username = mysqli_fetch_assoc($result);
+							?>
+									<img src="gambar/<?=$username['gambar_profile']?>"/>
+							<?php
+									// echo "<img src='gambar/".($username['gambar_profile'])."/>";									
+								} else {
+									echo "User tidak ditemukan";
+								}
+								echo ' '.$_SESSION['username'];
 							?>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="dropdownId">

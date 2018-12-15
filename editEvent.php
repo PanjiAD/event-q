@@ -64,15 +64,17 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
                                     <?php
                                         $query = "SELECT * FROM kategori WHERE deleted = 0";
                                         $result = mysqli_query($con, $query);
-                                        if (mysqli_num_rows($result) > 0) {
-                                            $kategori = 1;
-                                            while($row = mysqli_fetch_assoc($result)){
-                                            ?>
-                                                
-                                                <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?> </option>        
-                                    <?php
+                                        $kategori = 1;
+                                        $tag = '';
+                                            while($row = mysqli_fetch_array($result)){
+                                                if ($row['id_kategori'] == $event['id_kategori']) {
+                                                    $tag = 'selected';
+                                                }
+                                                else{
+                                                    $tag = '';
+                                                }
+                                                echo "<option value='".$row['id_kategori']."'".$tag.">".$row['jenis_kategori']."</option>";
                                             }
-                                        }
                                     ?>
                                 </select>
                         </div>

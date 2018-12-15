@@ -5,6 +5,7 @@ include 'helper/koneksi.php';
 
 $id_events = $_GET["id"]; 
 
+$prev = $_SERVER['HTTP_REFERER'];
 $query = "SELECT * FROM events WHERE id_events = $id_events";
 	$result = mysqli_query($con, $query);
 
@@ -72,16 +73,17 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
                                     }
                                 ?>
                                 </span> </br> 
-                            <label class="mt-4 mb-2 waktu_lokasi_desc">Jumlah Tiket</label>
-                            <span> : 
-                                <?php
-                                    echo $event['peserta'] .'/'. $event['peserta'];
-                                ?>
-                                </span>
                         </div>
                     </div>
                     <!-- <a href='proses/registrasiEvent.php?id=$id_events' class='btn btn-success btn-block mt-3'>Registrasi</a> -->
-                    <input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">
+                    <?php
+                        if ($prev == 'http://localhost/web_project/indexUser.php') {
+                            echo '<input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">';
+                        }
+                        else{
+                            echo '<a name="backBtn" id="backBtn" class="btn btn-dark btn-block mt-3" href="myEvent.php" role="button">Kembali</a>';
+                        }
+                    ?>
             </form> 
             </div>
             <div class="col-1"></div>

@@ -49,7 +49,8 @@ $code = $_FILES["file"]["error"];
         header("Location:../addEvent.php?error=$error");
     }
 
-$query = "INSERT INTO events( judul_event , lokasi , urls , gambar_event , tanggal_mulai , tanggal_akhir , waktu_mulai , waktu_akhir , harga , peserta, deskripsi , create_date , nama_penyelenggara , id_users, id_kategori) VALUES ( '$judul_event' , '$lokasi' , '$url' , '$nama_file' , '$tanggal_mulai' , '$tanggal_akhir' , '$waktu_mulai' , '$waktu_akhir' , '$harga' , '$peserta', '$deskripsi' , '$date' , '$instansi' , '$id_users' , '$kategori' )";
+$query = "INSERT INTO events( judul_event , lokasi , urls , gambar_event , tanggal_mulai , tanggal_akhir , waktu_mulai , waktu_akhir , harga , peserta, deskripsi , create_date , nama_penyelenggara , deleted, id_users, id_kategori) VALUES ( '$judul_event' , '$lokasi' , '$url' , '$nama_file' , '$tanggal_mulai' , '$tanggal_akhir' , '$waktu_mulai' , '$waktu_akhir' , '$harga' , '$peserta', '$deskripsi' , '$date' , '$instansi' , 0 , '$id_users' , '$kategori' )";
+
 
 if(mysqli_query($con, $query)){
     header("Location:../indexUser.php");

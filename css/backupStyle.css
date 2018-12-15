@@ -235,4 +235,44 @@ center{
     padding-bottom: 10px;
 }
 
+.manage{
+    margin-top: 50px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 50px;
+}
 
+.manageEvent h4{
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.manageEvent h2{
+    font-size: 1.5em;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.manageEvent h3{
+    font-size: 1.3em;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(47, 47, 47, 0.678);
+}
+
+.manageEvent .hasil{
+    font-size: 5em;
+    color: rgb(243, 49, 23);
+    margin: 5px 0;
+    
+}
+
+.manageEvent .asli{
+    font-size: 2em;
+}
+
+.manageEvent .col-6{
+    border: 1px solid rgba(47, 47, 47, 0.678);
+    display: block;
+    text-align: center;
+}
