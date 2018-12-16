@@ -10,8 +10,7 @@ $query = "UPDATE tiket SET deleted = 1 WHERE id_tiket = $id_tiket AND id_events 
 if (mysqli_query($con, $query)) {
     header("Location: ../tiket.php");
 } else {
-    $error = urldecode("Data tidak berhasil di delete");
-    header("Location: ../tiket?error=$error");
+    echo "<script> alert('Data tidak berhasil di update'); window.location = '../tiket.php';</script>";
 }
 
 mysqli_close($con); 

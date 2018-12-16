@@ -13,8 +13,7 @@
             header("Location: ../../admin/userAdmin.php");
         }
         else{
-            $error = urldecode("Data tidak berhasil ditambahkan");
-            header("Location: ../../admin/formAddUser.php?error=$error");
+            echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../../admin/formAddeUser.php';</script>";
         }
         mysqli_close($con);
     

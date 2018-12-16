@@ -9,10 +9,8 @@ die($query);
 if (mysqli_query($con, $query)) {
     header("Location: ../myEvent.php");
 } else {
-    $error = urldecode("Data tidak berhasil di delete");
-    header("Location: ../myEvent?error=$error");
+    echo "<script> alert('Data tidak berhasil di delete'); window.location = '../myEvent.php';</script>";
 }
-
 mysqli_close($con); 
 
 ?>

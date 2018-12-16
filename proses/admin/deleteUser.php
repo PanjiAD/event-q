@@ -8,8 +8,7 @@ $query = "UPDATE users SET deleted = 1 WHERE id_users = ('$id_users')";
 if (mysqli_query($con, $query)) {
     header("Location: ../../admin/userAdmin.php");
 } else {
-    $error = urldecode("Data tidak berhasil di delete");
-    header("Location:../../admin/formAddUser.php?error=$error");
+    echo "<script> alert('Data tidak berhasil di delete'); window.location = '../../admin/formAddeUser.php';</script>";
 }
 
 mysqli_close($con); 

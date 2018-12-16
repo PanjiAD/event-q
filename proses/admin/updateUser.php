@@ -23,9 +23,7 @@ $code = $_FILES["gambar"]["error"];
     $tipe_file = array("image/jpeg", "image/gif", "image/png");
     if(!in_array($_FILES["gambar"]["type"], $tipe_file))
     {
-    	$error = urldecode("cek kembali ekstensi file anda (*.jpeg,*.jpg,*.png,*.gif,)<br>");
-    	header("Location: ../../admin/formUpdateUser.php?error=$error");
-    	die();
+    	echo "<script> alert('cek kembali ekstensi file anda (*.jpeg,*.jpg,*.png,*.gif,)'); window.location = '../../admin/formUpdateUser.php';</script>";
       $upload_check = true;
     }
     
@@ -33,9 +31,7 @@ $code = $_FILES["gambar"]["error"];
     	$error = urldecode("Upload Sukses");
     }
     else{
-    	$error = urldecode("Upload Gagal");
-    	header("Location: ../../admin/formUpdateUser.php?error=$error");
-    	die();
+    	echo "<script> alert('Gagal upload gambar'); window.location = '../../admin/formUpdateUser.php';</script>";
     }
   }
 
@@ -54,8 +50,7 @@ else{
 if (mysqli_query($con, $query)) {
     header("Location: ../../admin/userAdmin.php");
 } else {
-    $error = urldecode("Data tidak berhasil di update");
-    header("Location: ../../admin/formUpdateUser.php?error=$error");
+    echo "<script> alert('Data tidak berhasil di update'); window.location = '../../admin/formUpdateUser.php';</script>";
 }
 
 // close mysql connection

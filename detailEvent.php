@@ -77,11 +77,11 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
                     </div>
                     <!-- <a href='proses/registrasiEvent.php?id=$id_events' class='btn btn-success btn-block mt-3'>Registrasi</a> -->
                     <?php
-                        if ($prev == 'http://localhost/web_project/indexUser.php' || $prev = 'http://localhost/web_project/index.php') {
-                            echo '<input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">';
-                        }
-                        else{
+                        if ($prev == 'http://localhost/web_project/myEvent.php') {
                             echo '<a name="backBtn" id="backBtn" class="btn btn-dark btn-block mt-3" href="myEvent.php" role="button">Kembali</a>';
+                        }
+                        else {
+                            echo '<input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">';
                         }
                     ?>
             </form> 

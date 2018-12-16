@@ -9,8 +9,7 @@
             header("Location: ../../admin/kategoriAdmin.php");
         }
         else{
-            $error = urldecode("Data tidak berhasil ditambahkan");
-            header("Location: ../../admin/formAddKategori.php?error=$error");
+            echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../../admin/formAddKategori.php';</script>";
         }
         mysqli_close($con);
 ?>

@@ -17,14 +17,12 @@ if(mysqli_num_rows($result) == 1) {
     if (mysqli_query($con, $query)) {
         header("Location: ../kelolaEvent.php?id=$event");
     } else {
-        $error = urldecode("Data tidak berhasil di delete");
-        header("Location: ../tiket?error=$error");
+        echo "<script> alert('Data tidak berhasil di update'); window.location = '../kelolaEvent.php?id=$event';</script>";
     }
     mysqli_close($con); 
 
 }
 else{
-    $error = urldecode("Nama yang diinputkan tak terdaftar");
-    header("Location: ../tiket?error=$error");
+    echo "<script> alert('Nama tidak terdaftar'); window.location = '../kelolaEvent.php?id=$event';</script>";
 }
 ?>

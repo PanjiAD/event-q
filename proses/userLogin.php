@@ -8,14 +8,13 @@ if (!empty($_POST["username"]) || !empty($_POST["password"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $query = "SELECT * FROM users WHERE (username = '$username' OR email = '$username') AND pass = '$password' ";
+    $query = "SELECT * FROM users WHERE (username = '$username' OR email = '$username') AND pass = '$password'";
     $result = mysqli_query($con, $query);
     
     if(mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
-
         $flag = $row["deleted"];
-
+        
         if ($flag == 0) {
             $idkategori = $row["id_users"];
             $level = $row["idusers_level"];
@@ -34,23 +33,19 @@ if (!empty($_POST["username"]) || !empty($_POST["password"])) {
             }
         }
         else {
-            $error = urlencode("Akun sudah terhapus");
-            header("Location: ../login.php?pesan=$error");
+            echo "<script> alert('Akun sudah terhapus'); window.location = '../login.php';</script>";
         }
         
     } 
     else{
-        $error = urldecode("Username atau Password tidak valid");
+        echo "<script> alert('Username atau Password tidak valid'); window.location = '../login.php';</script>";
     }
-    header("Location: ../login.php?pesan=$error");
 
     mysqli_close($con);
 }
 
 else{
-    die();
-    $error = urlencode("Username atau password kosong!");
-    header("Location: ../login.php?pesan=$error");
+    echo "<script> alert('Username atau Password kosong'); window.location = '../login.php';</script>";
 }
 
 ?>

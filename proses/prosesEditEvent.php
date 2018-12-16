@@ -31,20 +31,16 @@ $code = $_FILES["gambar"]["error"];
 
     $tipe_file = array("image/jpeg", "image/gif", "image/png");
     if(!in_array($_FILES["gambar"]["type"], $tipe_file))
-    {
-    	$error = urldecode("cek kembali ekstensi file anda (*.jpeg,*.jpg,*.png,*.gif,)<br>");
-    	header("Location: ../../admin/formUpdateUser.php?error=$error");
-    	die();
-      $upload_check = true;
+    {   
+        echo "<script> alert('cek kembali ekstensi file anda (*.jpeg,*.jpg,*.png,*.gif,)'); window.location = '../editEvent.php?id=$idEvents';</script>";
+        $upload_check = true;
     }
     
     if(!$upload_check AND move_uploaded_file($tmp,$path)){
     	$error = urldecode("Upload Sukses");
     }
     else{
-    	$error = urldecode("Upload Gagal");
-    	header("Location: ../../admin/formUpdateUser.php?error=$error");
-    	die();
+    	echo "<script> alert('Gagal upload gambar'); window.location = '../editEvent.php?id=$idEvents';</script>";
     }
   }
 
@@ -64,8 +60,7 @@ else{
 if (mysqli_query($con, $query)) {
     header("Location: ../myEvent.php");
 } else {
-    $error = urldecode("Data tidak berhasil di update");
-    header("Location: ../editEvent.php?error=$error");
+    echo "<script> alert('Data tidak berhasi di update'); window.location = '../editEvent.php?id=$idEvents';</script>";
 }
 
 // close mysql connection

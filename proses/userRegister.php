@@ -17,20 +17,17 @@
                 header("Location:../indexUser.php");
             }
             else{
-                $error = urldecode("Data tidak berhasil ditambahkan");
-                header("Location:../register.php?error=$error");
+                echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../register.php';</script>";
             }
             
             mysqli_close($con);
         }
         else{
-            $error = urldecode("Confirm Password tidak sesuai");
-            header("Location:../register.php?error=$error");
+            echo "<script> alert('Confirm password tidak sesuai'); window.location = '../register.php';</script>";
         }
     }
     else{
-        $error = urldecode("Password kurang panjang");
-            header("Location:../register.php?error=$error");
+        echo "<script> alert('Password minimal 6 karakter'); window.location = '../register.php';</script>";
     }
     
 ?>
