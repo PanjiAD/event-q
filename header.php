@@ -4,52 +4,7 @@
 	
 	$level = $_SESSION['idusers_level'];
 
-	if ($level == 1) {
-?>
-	<div class="header-top">
-	<div class="wrap" style="display:flex; align-items: center">
-		<div class="logo">
-			<a href="index.php"><img src="gambar/eventcinemas-logo.png" alt="" /></a>
-		</div>
-		<div class="cssmenu">
-			<nav class="navbar navbar-expand-sm">
-					<div class="collapse navbar-collapse" id="collapsibleNavId">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li class="nav-item">
-							<a class="nav-link" href="index.php">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="event.php">Acara</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="addEvent.php">Buat Acara</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="akun" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="gambar/business-man.png"/> 
-							<?php
-								$query = "SELECT * FROM users";
-								$result = mysqli_query($con, $query);
-								$username = mysqli_fetch_assoc($result);
-								echo $username['username'];
-							?>
-							</a>
-							<div class="dropdown-menu" aria-labelledby="dropdownId">
-								<a class="dropdown-item" href="#">Akun</a>
-								<a class="dropdown-item" href="#">Tiket</a>
-								<a class="dropdown-item" href="#">Kelola Event</a>
-								<a class="dropdown-item" href="logout.php">Log Out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-		<div class="clear"></div>
-	</div>
-	</div>
-
-<?php
-	} else if($level == 2){
+	 if($level == 2){
 ?>
 	<div class="header-top">
 	<div class="wrap"> 
@@ -59,13 +14,10 @@
 		<div class="cssmenu">
 		
 			<nav class="navbar navbar-expand-sm">
-					<div class="collapse navbar-collapse" id="collapsibleNavId">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<div class="collapse navbar-collapse" >
+					<ul class="navbar-nav mt-2 mt-lg-0 ml-auto">
 						<li class="nav-item">
 							<a class="nav-link" href="index.php">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="event.php">Acara</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="addEvent.php">Buat Acara</a>
@@ -74,13 +26,13 @@
 							<a class="nav-link dropdown-toggle" href="#" id="akun" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<?php
 								$user = $_SESSION['username'];
-								$query = "SELECT gambar_profile FROM users WHERE username = '$user'";
+								$query = "SELECT gambar_profile,id_users FROM users WHERE username = '$user'";
 								$result = mysqli_query($con, $query);
 
 								if(mysqli_num_rows($result) == 1) {
 									$username = mysqli_fetch_assoc($result);
 							?>
-									<img src="gambar/<?=$username['gambar_profile']?>"/>
+									<img src="gambar/profil/<?=$username['gambar_profile']?>"/>
 							<?php
 									// echo "<img src='gambar/".($username['gambar_profile'])."/>";									
 								} else {
@@ -90,10 +42,10 @@
 							?>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="dropdownId">
-								<a class="dropdown-item" href="#">Akun</a>
-								<a class="dropdown-item" href="tiket.php">Tiket</a>
-								<a class="dropdown-item" href="myEvent.php">Kelola Event</a>
-								<a class="dropdown-item" href="logout.php">Log Out</a>
+								<a class="dropdown-item mb-1" href="akun.php?id=<?php echo $username['id_users']?>"><i class="fas fa-user-circle mr-2"></i> Akun</a>
+								<a class="dropdown-item mb-1" href="tiket.php"><i class="fas fa-ticket-alt mr-2"></i> Tiket</a>
+								<a class="dropdown-item mb-1" href="myEvent.php"><i class="fas fa-calendar-check mr-2"></i> Kelola Event</a>
+								<a class="dropdown-item mb-1" href="logout.php" style="border-top:1px solid;"><i class="fas fa-sign-out-alt mr-2"></i> Log Out</a>
 							</div>
 						</li>
 					</ul>
@@ -124,12 +76,9 @@
 			<div class="cssmenu">
 			<nav class="navbar navbar-expand-sm">
 					<div class="collapse navbar-collapse" id="collapsibleNavId">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<ul class="navbar-nav mt-2 mt-lg-0 ml-auto">
 						<li class="nav-item">
 							<a class="nav-link" href="index.php">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="event.php">Acara</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="addEvent.php">Buat Acara</a>

@@ -47,12 +47,6 @@
                             Isikan ulang password
                         </div>
                     </div>
-                    <div class="form-group mt-4">
-                    <label class="mb-2">Foto Profil</label>
-                        <div class="col-md-9">
-                            <input type="file" name="file">
-                        </div>
-                    </div>
                     
                     <div class="form-group mb-4 mt-4" >
                         <input type="submit" value="submit" class="btn btn-success btn-block">

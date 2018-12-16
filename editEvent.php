@@ -3,7 +3,7 @@
 include 'helper/koneksi.php';
     session_start();
 
-$id_events = $_GET["id"]; 
+$id_events = $_GET["id"];
 
 $query = "SELECT * FROM events WHERE id_events = $id_events";
 	$result = mysqli_query($con, $query);
@@ -19,7 +19,6 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Page Title</title>
     <?php include 'head.php'?>

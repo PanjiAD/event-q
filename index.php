@@ -88,12 +88,13 @@
 									<p class="day">20</p>
 								</div>
 								<div class="col-9">
-									<div class="eventTitle">
+								<div class="eventTitle">
 										<h2> <?php echo $row['judul_event']; ?> </h2>
 									</div>
 									<p class="time"><?php echo $row['tanggal_mulai']; ?>, <?php echo $row['waktu_mulai']; ?></p>
 									<p class="place"> <?php echo $row['lokasi']; ?> </p>
-									<p class="status_ticket"><?php 
+									<p class="status_ticket">
+									<?php 
 									if ($row['harga'] == 0) {
 										echo 'free';
 									}
@@ -101,6 +102,7 @@
 										echo 'Rp '.$row['harga'];	
 									}
 									 ?> </p>
+									
 								</div>	
 							</div>
   						</div>

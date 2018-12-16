@@ -63,6 +63,14 @@
                             <?php
                                     }
                                 }
+                                else{
+                            ?>
+                                <div class="noEvent d-flex justify-content-center align-items-center flex-column" style="height:200px">
+                                    <img src="gambar/item/calendar.svg" style="width:15%">
+                                    <h4 class="eventTitle" style="margin: 10px;">Tidak ada event yang dibuat</h4>
+                                </div>
+                            <?php
+                                }
                                 mysqli_close($con); 
                             ?>
                         </div>

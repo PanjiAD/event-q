@@ -38,7 +38,7 @@
 								if(mysqli_num_rows($result) == 1) {
 									$username = mysqli_fetch_assoc($result);
 							?>
-									<img src="gambar/<?=$username['gambar_profile']?>"/>
+									<img src="gambar/profil/<?=$username['gambar_profile']?>"/>
                         <?php
                                 }
                         ?>
@@ -86,6 +86,16 @@
                                         </div>
                             <?php
                                     }
+                                }
+                                else{                               
+                            ?>
+                                <div class="noTiket d-flex justify-content-center align-items-center flex-column" style="height:200px">
+                                    <img src="gambar/item/ticket.svg" style="width:15%">
+                                    <h4 class="eventTitle" style="margin: 10px;">Tidak ada tiket</h4>
+                                
+                                </div>
+
+                            <?php
                                 }
                                 mysqli_close($con); 
                             ?>
