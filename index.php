@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Booking Event</title>
+    <title>Event.com - book amazing events or make your own event</title>
     <?php include 'head.php'?>
 	
 </head>
@@ -27,13 +27,21 @@
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-8">
-			<form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
+			<div class="row">
+					<form action="" method="POST" class="col-6">
 						<div class="row">
-							<div class="col-4">
+							<div class="col-6">
 								<label for="event" class="mb-2" style="font-style:bold">Pencarian Event</label>
 								<input type="text" name="search" class="form-control" placeholder="Event">
 							</div>
-							<div class="col-4">
+							<div class="col-6 d-flex justify-content-center align-items-end">
+								<input type="submit" name="searchByName" value="Search" class="btn btn-success btn-block">
+								</div>
+							</div>
+					</form>
+					<form action="" method="POST" class="col-6">
+						<div class="row">
+							<div class="col-6">
 								<label for="lokasi" class="mb-2" style="font-style:bold">Kategori</label>
 								<div class="dropdown">
  									<select name="kategori" cols="10" rows="5" class="form-control" > 
@@ -52,10 +60,13 @@
                     		            </select>
 								</div>
 							</div>
-							<div class="col-4 d-flex justify-content-center align-items-end">
-								<input type="submit" name="submit" value="Search" class="btn btn-success btn-block">
+							<div class="col-6 d-flex justify-content-center align-items-end">
+								<input type="submit" name="searchByKategori" value="Search" class="btn btn-success btn-block">
 							</div>
+							</div>
+					</form>
 						</div>
+	
 					</form>
 			</div>
 			<div class="col-2"></div>
@@ -81,7 +92,7 @@
 					// die(isset($kategori));
 					else if(isset($kategori)){
 						$query = "SELECT * FROM events WHERE id_kategori = $kategori AND deleted = 0";
-						die($query);	
+							
 					}
 					else{
 						$query = "SELECT * FROM events WHERE deleted = 0";

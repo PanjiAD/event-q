@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-    <title>Page Title</title>
+    <title>Event.com | Register Account</title>
     <?php include 'head.php'?>  
 </head>
 <body>

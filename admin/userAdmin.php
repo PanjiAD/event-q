@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>srtdash - ICO Dashboard</title>
+    <title>Event.com | User Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -39,34 +39,23 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
-    <div id="preloader">
+<div id="preloader">
         <div class="loader"></div>
     </div>
-    <!-- preloader area end -->
-    <!-- page container area start -->
-    <div class="page-container">
+<div class="page-container">
         <!-- sidebar menu area start -->
         <div class="sidebar-menu">
             <div class="sidebar-header">
-                <div class="logo">
-                    <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
-                </div>
+            <div class="logo">
+			    <a href="index.php"><img src="../gambar/eventcinemas-logo.png" alt="" /></a>
+		    </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
-                                <ul class="collapse">
-                                    <li class="active"><a href="index.html">ICO dashboard</a></li>
-                                    <li><a href="index2.html">Ecommerce dashboard</a></li>
-                                    <li><a href="index3.html">SEO dashboard</a></li>
-                                </ul>
+                                <a href="dashboard.php" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Tables
@@ -105,16 +94,14 @@
                         <ul class="notification-area pull-right">
                             <li id="full-view"><i class="ti-fullscreen"></i></li>
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                            <li class="dropdown">
-                                <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>2</span>
-                                </i>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- header area end -->
+            <!-- page title area start -->
+            
             <!-- page title area start -->
             <div class="page-title-area">
                 <div class="row align-items-center">
@@ -129,7 +116,22 @@
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
+
+                        <?php
+                                $user = $_SESSION['username'];
+								$query = "SELECT gambar_profile,id_users FROM users WHERE username = '$user'";
+								$result = mysqli_query($con, $query);
+
+								if(mysqli_num_rows($result) == 1) {
+									$username = mysqli_fetch_assoc($result);
+							?>
+									<img src="../gambar/profil/<?=$username['gambar_profile']?>" style="width:40px;" class="mr-2"/>
+							<?php							
+								} else {
+									echo "User tidak ditemukan";
+								}
+							?>
+
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
                             <?php
 								echo $_SESSION['username'];
@@ -169,6 +171,7 @@
                         </thead>
                         <tbody>
                         <?php
+                            
                             $query = "SELECT * FROM users WHERE deleted = 0";
                             $result = mysqli_query($con, $query);
 
@@ -182,8 +185,8 @@
                                     <td>" .$row["nama"]. "</td>
                                     <td>" .$row["username"]. "</td>
                                     <td>" .$row["pass"]. "</td>
-                                    <td>" .$row["email"]. "</td>
-                                    <td> <img src='../gambar/profil/".$row['gambar_profile']."' style='width:100px;'> </td>
+                                    <td width='10%'>" .$row["email"]. "</td>
+                                    <td> <img src='../gambar/profil/".$row['gambar_profile']."' style='width:70px;'> </td>
                                     <td>" .$row["create_date"]. "</td>
                                     <td>
                                         <a href='formUpdateUser.php?id=$id_users

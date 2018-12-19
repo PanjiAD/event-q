@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Booking Event</title>
+    <title>User Ticket | Event.com</title>
     <?php include 'head.php'?>
 	
 </head>

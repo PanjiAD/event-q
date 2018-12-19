@@ -17,7 +17,7 @@
 ?>
 
 <head>
-	<title>EvenHits | Login</title>
+	<title>Even.com | Log In</title>
 	<?php include 'head.php'?>
 </head>
 <body>

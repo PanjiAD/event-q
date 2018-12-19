@@ -22,7 +22,7 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
 <html>
 
 <head>
-    <title>Page Title</title>
+    <title><?= $event['judul_event']?> | Event.com</title>
     <?php include 'head.php'?>
 </head>
 <body>
@@ -84,10 +84,10 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
                     ?>
                             <div class="row">
                                 <div class="col-6">
-                                    <a name="backBtn" id="backBtn" class="btn btn-dark btn-block mt-3" href="indexUser.php" role="button">Kembali</a>;
+                                    <a name="backBtn" id="backBtn" class="btn btn-dark btn-block mt-3" href="indexUser.php" role="button">Kembali</a>
                                 </div>
                                 <div class="col-6">
-                                    <input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">;
+                                    <input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">
                                 </div>
                             </div>
                     <?php

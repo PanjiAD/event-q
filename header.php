@@ -33,8 +33,7 @@
 									$username = mysqli_fetch_assoc($result);
 							?>
 									<img src="gambar/profil/<?=$username['gambar_profile']?>"/>
-							<?php
-									// echo "<img src='gambar/".($username['gambar_profile'])."/>";									
+							<?php							
 								} else {
 									echo "User tidak ditemukan";
 								}

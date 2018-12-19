@@ -20,7 +20,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Booking Event</title>
+    <title>Event.com - book amazing events or make your own event</title>
     <?php include 'head.php'?>
 	
 </head>
@@ -84,14 +84,16 @@
 	<div class="container anyEvent">
 		<div class="row">
 				<?php
+					$search = $_POST['search'];
+					$jenis = $_POST['kategori'];
 					$nama = $_POST['searchByName'];
 					$kategori = $_POST['searchByKategori'];
-					
+
 					if (isset($nama)) {
-						$query = "SELECT * FROM events WHERE judul_event LIKE '%{$nama}%' AND deleted = 0";
+						$query = "SELECT * FROM events WHERE judul_event LIKE '%{$search}%' AND deleted = 0";
 					}
 					else if(isset($kategori)){
-						$query = "SELECT * FROM events WHERE id_kategori = $kategori AND deleted = 0";
+						$query = "SELECT * FROM events WHERE id_kategori = $jenis AND deleted = 0";
 					}
 					else{
 						$query = "SELECT * FROM events WHERE deleted = 0";

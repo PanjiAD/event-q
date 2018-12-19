@@ -664,7 +664,7 @@ tbody{
     top: 50%;
     width: 4px;
     height: 36px;
-    background: var(--primary-color);
+    background-color: rgb(250, 51, 25);
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
 }
@@ -679,21 +679,6 @@ tbody{
 
 ul.breadcrumbs {
     margin-top: 4px;
-}
-
-.breadcrumbs li {
-    display: inline-block;
-}
-
-.breadcrumbs li a,
-.breadcrumbs li span {
-    display: block;
-    font-size: 14px;
-    font-weight: 400;
-    color: #7801ff;
-    letter-spacing: 0;
-    margin-right: 16px;
-    position: relative;
 }
 
 .breadcrumbs li a:before {
@@ -720,8 +705,8 @@ ul.breadcrumbs {
             align-items: center;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    background: -webkit-linear-gradient(left, #8914fe 0%, #8063f5 100%);
-    background: linear-gradient(to right, #8914fe 0%, #8063f5 100%);
+    background: -webkit-linear-gradient(left, rgb(250, 51, 25) 0%, rgb(233, 95, 77) 100%);
+    background: linear-gradient(to right, rgb(250, 51, 25) 0%, rgb(233, 95, 77) 100%);
     padding: 17px 38px;
     position: relative;
 }

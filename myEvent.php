@@ -17,7 +17,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>EvenHits | Login</title>
+	<title>Event.com - Manage Events</title>
 	<?php include 'head.php'?>
 </head>
 <body>

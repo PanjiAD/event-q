@@ -12,7 +12,7 @@
 <html>
 
 <head>
-    <title>Page Title</title>
+    <title>Event.com - Make your own event</title>
     <?php include 'head.php'?>
 </head>
 <body>

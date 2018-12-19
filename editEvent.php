@@ -20,7 +20,7 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page Title</title>
+    <title>Event.com - <?=$event['judul_event']?></title>
     <?php include 'head.php'?>
 </head>
 <body>

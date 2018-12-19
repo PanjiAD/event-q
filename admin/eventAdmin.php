@@ -12,12 +12,6 @@
 	else {
 		header("location: ../login.php");
 	}
-    // if (isset($_GET['pesan'])) {
-    //     $mess = "<p> {$_GET['pesan']}</p>";
-    // }
-    // else{
-    //     $mess = " ";
-    // };
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -25,7 +19,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>srtdash - ICO Dashboard</title>
+    <title>Event.com | Event Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -46,83 +40,7 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-    <!-- preloader area end -->
-    <!-- page container area start -->
-    <div class="page-container">
-        <!-- sidebar menu area start -->
-        <div class="sidebar-menu">
-            <div class="sidebar-header">
-            <div class="logo">
-			    <a href="index.php"><img src="../gambar/eventcinemas-logo.png" alt="" /></a>
-		    </div>
-            </div>
-            <div class="main-menu">
-                <div class="menu-inner">
-                    <nav>
-                        <ul class="metismenu" id="menu">
-                            <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
-                                <ul class="collapse">
-                                    <li class="active"><a href="index.html">ICO dashboard</a></li>
-                                    <li><a href="index2.html">Ecommerce dashboard</a></li>
-                                    <li><a href="index3.html">SEO dashboard</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Tables
-                                    </span></a>
-                                <ul class="collapse">
-                                    <li><a href="eventAdmin.php"> Event </a></li>
-                                    <li><a href="userAdmin.php"> User </a></li>
-                                    <li><a href="kategoriAdmin.php"> Kategori </a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="main-content">
-            <!-- header area start -->
-            <div class="header-area">
-                <div class="row align-items-center">
-                    <!-- nav and search button -->
-                    <div class="col-md-6 col-sm-8 clearfix">
-                        <div class="nav-btn pull-left">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="search-box pull-left">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
-                                <i class="ti-search"></i>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- profile info & task notification -->
-                    <div class="col-md-6 col-sm-4 clearfix">
-                        <ul class="notification-area pull-right">
-                            <li id="full-view"><i class="ti-fullscreen"></i></li>
-                            <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                            <li class="dropdown">
-                                <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>2</span>
-                                </i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- header area end -->
-            <!-- page title area start -->
+    <?php include 'headerAdmin.php'?>
             <div class="page-title-area">
                 <div class="row align-items-center">
                     <div class="col-sm-6">
@@ -165,16 +83,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Event</th>
-                                <th>Lokasi</th>
-                                <th>URL</th>
-                                <th>Poster Event</th>
                                 <th>Tanggal</th>
-                                <th>Waktu</th>
-                                <th>Harga</th>
-                                <th>Peserta</th>
-                                <th>Deskripsi</th>
                                 <th>Nama Penyelenggara</th>
-                                <th>create_date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -190,31 +100,74 @@
                                     echo "
                                     <tr>
                                     <td>" . $index++ . "</td>
-                                    <td>" .$row["judul_event"]. "</td>
-                                    <td>" .$row["lokasi"]. "</td>
-                                    <td>" .$row["urls"]. "</td>
-                                    <td> <img src='../gambar/".$row['gambar_event']."' style='width:100px;'> </td>
-                                    <td>" .$row["tanggal_mulai"]. ' - ' . $row["tanggal_akhir"] ."</td>
-                                    <td>" .$row["waktu_mulai"]. ' - ' . $row["waktu_akhir"] ."</td>
-                                    <td>" .$row["harga"]. "</td>
-                                    <td>" .$row["peserta"]. "</td>
-                                    <td>" .$row["deskripsi"]. "</td>
+                                    <td width='20%'>" .$row["judul_event"]. "</td>
+                                    <td width='13%'>" .$row["tanggal_mulai"]. ' - ' . $row["tanggal_akhir"] ."</td>
                                     <td>" .$row["nama_penyelenggara"]. "</td>
-                                    <td>" .$row["create_date"]. "</td>
                                     <td>
-                                        <a href='formUpdateEvent.php?id=$id_events
-                                        ' class='btn btn-warning'>Update</a>
-                                        <a href='../proses/deleteEvent.php?id=$id_events
-                                        ' class='btn btn-danger'>Delete</a>
+                                        <button type='button' class='btn btn-outline-primary' data-toggle='modal' 
+                                        data-target='#detailEvent".$id_events."'>Detail</button>
+                                        <a href='formUpdateEvent.php?id=$id_events' class='btn btn-warning'>Update</a>
+                                        <a href='../proses/deleteEvent.php?id=$id_events' class='btn btn-danger'>Delete</a>
                                         </td>
                                     </tr>
                                  ";
+
+                            ?>
+                    <div class="modal fade" id="detailEvent<?=$id_events?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"> <?=$row['judul_event']?></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <input type="hidden" name="idUsers" value="<?php echo $user["id_users"] ?>">
+                                  <div class="row">
+                                    <div class="col-4">
+                                        <img src="../gambar/<?php echo $row['gambar_event']?>"/>
+                                    </div>
+                                    <div class="col-8">
+                                          <div class="row">
+                                              <div class="col-3">
+                                                <p  style="font-weight:bold;">Nama Penyelenggara </p>
+                                                <p  style="font-weight:bold;">Lokasi </p>
+                                                <p  style="font-weight:bold;">URL </p>
+                                                <p  style="font-weight:bold;">Tanggal </p>
+                                                <p  style="font-weight:bold;">Waktu </p>
+                                                <p  style="font-weight:bold;">Harga </p>
+                                                <p  style="font-weight:bold;">Jumlah Peserta </p>
+                                              </div>
+                                              <div class="col-9">
+                                                <p>: <?=$row['nama_penyelenggara']?></p></br>
+                                                <p>: <?=$row['lokasi']?></p>
+                                                <p>: <?=$row['urls']?></p>
+                                                <p>: <?=$row['tanggal_mulai']?> - <?=$row['tanggal_akhir']?></p>
+                                                <p>: <?=$row['waktu_mulai']?> - <?=$row['waktu_akhir']?></p>
+                                                <p>: <?=$row['harga']?></p>
+                                                <p>: <?=$row['peserta']?></p>
+                                              </div>
+                                          </div>
+                                    </div>
+                                  </div>
+                                  <p style="font-weight:bold;">Deskripsi Acara</p>
+                                        <p><?=$row['deskripsi']?></p>
+                             </div>
+                          </div>
+                        </div>
+                    </div>
+                            <?php
                                 }
                             }
                             mysqli_close($con); 
                             ?>
                         </tbody>
                     </table>
+                    
+
+                    
+
                 <!-- </div> -->
             </div>
         </div>

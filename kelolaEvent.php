@@ -28,7 +28,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>EvenHits | Login</title>
+	<title>Event.com - <?=$event['judul_event']?></title>
 	<?php include 'head.php'?>
 </head>
 <body>
