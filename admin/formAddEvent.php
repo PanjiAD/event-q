@@ -1,17 +1,23 @@
 <?php
-    include '../helper/koneksi.php';
+	include '../helper/koneksi.php';
+
 	session_start();
 	// session_destroy();
 
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-        if ($_SESSION['idusers_level'] == '2') {
-            header("location: ../indexUser.php");
-        }
-        else if ($_SESSION['idusers_level'] == '') {
-            header("location: ../index.php");
-        }
-    }
-
+		if($_SESSION['idusers_level'] == '2'){
+			header("location: ../indexUser.php");	
+		}
+	}
+	else {
+		header("location: ../login.php");
+	}
+    // if (isset($_GET['pesan'])) {
+    //     $mess = "<p> {$_GET['pesan']}</p>";
+    // }
+    // else{
+    //     $mess = " ";
+    // };
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -53,9 +59,9 @@
         <!-- sidebar menu area start -->
         <div class="sidebar-menu">
             <div class="sidebar-header">
-                <div class="logo">
-                    <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
-                </div>
+            <div class="logo">
+			    <a href="index.php"><img src="../gambar/eventcinemas-logo.png" alt="" /></a>
+		    </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
@@ -124,7 +130,7 @@
                             <h4 class="page-title pull-left">Tables</h4>
                             <ul class="breadcrumbs pull-left">
                                 <!-- <li><a href="index.html">Home</a></li> -->
-                                <li>Kategori</li>
+                                <li><span>Event</span></li>
                             </ul>
                         </div>
                     </div>
@@ -134,7 +140,7 @@
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
                             <?php
 								echo $_SESSION['username'];
-							?>     
+							?> 
                             <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
@@ -143,53 +149,105 @@
                     </div>
                 </div>
             </div>
-            <!-- page title area end -->
-            <div class="container">
-                <h3 class="text-center mt-4">Data Kategori</h3>
-                <?php
-                $message = '';
-                if(isset($_GET["error"])){
-                    $message = $_GET["error"];
-                    echo " <p style='color:red; font-style:italic'>$message</p>";
-                }
-                ?>
-                <a href="formAddKategori.php" class="btn btn-success mt-2 mb-3" enctype="multipart/form-data">Tambah Kategori</a>
-                <!-- <div class="row"> -->
-                    <table id="barang" class="table table-stripped tex-center-mt-3" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Jenis Kategori</th>
-                                <th>action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                            $query = "SELECT * FROM kategori WHERE deleted = 0";
-                            $result = mysqli_query($con, $query);
-
-                            if (mysqli_num_rows($result) > 0){
-                                $index = 1; 
-                                while($row = mysqli_fetch_assoc($result)){
-                                    $id_kategori = $row["id_kategori"];
-                                    echo "
-                                    <tr>
-                                    <td>" . $index++ . "</td>
-                                    <td>" .$row["jenis_kategori"]. "</td>
-                                    <td>
-                                        <a href='formUpdateKategori.php?id=$id_kategori' class='btn btn-warning'>Update</a>
-                                        <a href='../proses/admin/deleteKategori.php?id=$id_kategori' class='btn btn-danger'>Delete</a>
-                                        </td>
-                                    </tr>
-                                 ";
-                                }
-                            }
-                            mysqli_close($con); 
-                            ?>
-                        </tbody>
-                    </table>
-                <!-- </div> -->
+            <div class="bodyAdd">
+            <h3 class="text-center mt-4">Tambah Event</h3>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="form-group mt-4">
+                    <form class="formLogin" action="../proses/addEvent.php" method="POST" enctype="multipart/form-data">
+					    	<label for="judul" class="mb-2">Judul Event</label>
+					    	<input type="text" name="judul" class="form-control" placeholder="Ketik judul acara disini" required>
+                        </div>
+                        <div class="form-group mt-4">
+					    	<label for="lokasi" class="mb-2">Lokasi</label>
+					    	<input type="text" name="lokasi" class="form-control" placeholder="Masukkan alamat lengkap tempat dimana acara akan diselenggarakan.
+                            " required>
+                        </div>
+                        <div class="form-group mt-4">
+					    	<label for="url" class="mb-2">URL</label>
+					    	<input type="url" name="url" class="form-control" placeholder="Masukkan tautan Google Map petunjuk arah dimana lokasi acara
+                            " required>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label class="mb-2">Gambar Sampul</label></br>
+                            <input type="file" name="file">
+                        </div>
+                        <div class="form-group mt-4">
+					    	<label for="deskripsi" class="mb-2">Deskripsi</label>
+                            <textarea name="deskripsi" cols="10" rows="5" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="kategori" class="col-form-label">Kategori</label>
+                                <select name="kategori" cols="10" rows="5" class="form-control" required> 
+                                    <?php
+                                        $query = "SELECT * FROM kategori WHERE deleted = 0";
+                                        $result = mysqli_query($con, $query);
+                                        if (mysqli_num_rows($result) > 0) {
+                                            // $kategori = 1;
+                                            while($row = mysqli_fetch_assoc($result)){
+                                    ?>
+                                                <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?> </option>        
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                        </div>
+                        <div class="form-group mt-4">
+					        <label for="tanggal" class="mb-2" style="font-style:bold">Waktu Mulai</label>
+                            <div class="row">
+                                <div class="col-6">
+						            <input type="date" name="tanggal_mulai" class="form-control" placeholder="Tanggal">
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="waktu_mulai" class="form-control" placeholder="Masukkan waktu dimulainya acara" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4">
+					        <label for="tanggal" class="mb-2" style="font-style:bold">Waktu Akhir</label>
+                            <div class="row">
+                                <div class="col-6">
+						            <input type="date" name="tanggal_akhir" class="form-control" placeholder="Tanggal">
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="waktu_akhir" class="form-control" placeholder="Masukkan waktu berakhirnya acara" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="harga" class="mb-2">Harga Tiket</label></br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio">Free
+                                    </label>
+                                    <label class="radio-inline ml-3">
+                                        <input type="radio" name="optradio">Berbayar
+                                    </label>
+                                </div>  
+                                <div class="col-9">
+                                    <input type="number" name="harga" class="form-control" placeholder="Masukkan harga tiket">
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="form-group mt-4">
+					    	<label for="peserta" class="mb-2">Peserta</label>
+					    	<input type="number" name="peserta" class="form-control" placeholder="Masukkan jumlah peserta" required>
+                        </div>
+                        <div class="form-group mt-4">
+					    	<label for="instansi" class="mb-2">Penyelenggara</label>
+					    	<input type="text" name="instansi" class="form-control" placeholder="Masukkan nama penyelenggara acara" required>
+                        </div>
+                        <div class="form-group mb-4 mt-4" >
+                        <input type="submit" name="submit" value="Kirim" class="btn btn-success btn-block">
+					</div>
+                    </form>
+                </div>
+                <div class="col-2"></div>
             </div>
+        </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->

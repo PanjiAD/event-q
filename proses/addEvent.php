@@ -4,6 +4,8 @@ include '../helper/koneksi.php';
 
 session_start();
 
+$prev = $_SERVER['HTTP_REFERER'];
+
 $judul_event = $_POST["judul"];
 $lokasi = $_POST["lokasi"];
 $url = $_POST["url"];
@@ -50,11 +52,22 @@ $code = $_FILES["file"]["error"];
 $query = "INSERT INTO events( judul_event , lokasi , urls , gambar_event , tanggal_mulai , tanggal_akhir , waktu_mulai , waktu_akhir , harga , peserta, deskripsi , create_date , nama_penyelenggara , deleted, id_users, id_kategori) VALUES ( '$judul_event' , '$lokasi' , '$url' , '$nama_file' , '$tanggal_mulai' , '$tanggal_akhir' , '$waktu_mulai' , '$waktu_akhir' , '$harga' , '$peserta', '$deskripsi' , '$date' , '$instansi' , 0 , '$id_users' , '$kategori' )";
 
 
-if(mysqli_query($con, $query)){
-    header("Location:../indexUser.php");
+if ($prev == 'http://localhost/web_project/admin/formAddEvent.php') {
+    if(mysqli_query($con, $query)){
+        header("Location:../admin/eventAdmin.php");
+    }
+    else{
+        echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../admin/eventAdmin.php';</script>";
+    }
 }
+
 else{
-    echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../addEvent.php';</script>";
+    if(mysqli_query($con, $query)){
+        header("Location:../indexUser.php");
+    }
+    else{
+        echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../addEvent.php';</script>";
+    }
 }
 
 mysqli_close($con);

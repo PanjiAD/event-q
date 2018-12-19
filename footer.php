@@ -2,17 +2,7 @@
 		<div class="wrap">
 			<div class="footer-bottom">
 				<div class="copy">
-					<p>© 2014 Template by <a href="http://w3layouts.com" target="_blank"> w3layouts</a></p>
-				</div>
-				<div class="social">
-					<ul>
-						<li class="facebook"><a href="#"><span> </span></a></li>
-						<li class="twitter"><a href="#"><span> </span></a></li>
-						<li class="linked"><a href="#"><span> </span></a></li>
-						<li class="arrow"><a href="#"><span> </span></a></li>
-						<li class="dot"><a href="#"><span> </span></a></li>
-						<li class="rss"><a href="#"><span> </span></a></li>
-					</ul>
+					<p>© Website Event Booking by <a href="https://github.com/PanjiAD" target="_blank"> Panji Awwaludi D ( 19 )</a></p>
 				</div>
 				<div class="clear"></div>
 			</div>

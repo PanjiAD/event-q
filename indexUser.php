@@ -5,7 +5,8 @@
 	session_start();
 	// session_destroy();
 
-    if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
+
+	if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
         if ($_SESSION['idusers_level'] == '1') {
             header("location: admin/indexAdmin.php");
 		}
@@ -13,12 +14,7 @@
 	else {
 		header("location: login.php");
 	}
-    // if (isset($_GET['pesan'])) {
-    //     $mess = "<p> {$_GET['pesan']}</p>";
-    // }
-    // else{
-    //     $mess = " ";
-    // };
+    
 ?>
 
 <!DOCTYPE html>
@@ -34,35 +30,46 @@
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-8">
-				<div class="row">	
-					<div class="col-4">
-						<label for="event" class="mb-2" style="font-style:bold">Pencarian Event</label>
-						<input type="text" name="event" id="event" class="form-control" placeholder="Event">
-					</div>
-					<div class="col-4">
-						<label for="lokasi" class="mb-2" style="font-style:bold">Kategori</label>
-						<div class="dropdown">
- 							<select name="kategori" cols="10" rows="5" class="form-control" > 
-                                    <?php
-                                        $query = "SELECT * FROM kategori WHERE deleted = 0";
-                                        $result = mysqli_query($con, $query);
-                                        if (mysqli_num_rows($result) > 0) {
-                                            $kategori = 1;
-                                            while($row = mysqli_fetch_assoc($result)){
-                                            ?>
-                                                <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?> </option>        
-                                    <?php
-                                            }
-                                        }
-                                    ?>
-                                </select>
+					<div class="row">
+					<form action="" method="POST" class="col-6">
+						<div class="row">
+							<div class="col-6">
+								<label for="event" class="mb-2" style="font-style:bold">Pencarian Event</label>
+								<input type="text" name="search" class="form-control" placeholder="Event">
+							</div>
+							<div class="col-6 d-flex justify-content-center align-items-end">
+								<input type="submit" name="searchByName" value="Search" class="btn btn-success btn-block">
+								</div>
+							</div>
+					</form>
+					<form action="" method="POST" class="col-6">
+						<div class="row">
+							<div class="col-6">
+								<label for="lokasi" class="mb-2" style="font-style:bold">Kategori</label>
+								<div class="dropdown">
+ 									<select name="kategori" cols="10" rows="5" class="form-control" > 
+                    		            <?php
+                    		                $query = "SELECT * FROM kategori WHERE deleted = 0";
+                    		                $result = mysqli_query($con, $query);
+                    		                if (mysqli_num_rows($result) > 0) {
+                    		                    $kategori = 1;
+                    		                    while($row = mysqli_fetch_assoc($result)){
+                    		            ?>
+                    		                        <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?></option>        
+                    		            <?php
+                    		                    }
+                    		                }
+                    		            ?>
+                    		            </select>
+								</div>
+							</div>
+							<div class="col-6 d-flex justify-content-center align-items-end">
+								<input type="submit" name="searchByKategori" value="Search" class="btn btn-success btn-block">
+							</div>
+							</div>
+					</form>
 						</div>
-					</div>
-					<div class="col-4">
-					<label for="tanggal" class="mb-2" style="font-style:bold">Tanggal</label>
-						<input type="date" name="tanggal" id="tanggal" class="form-control" placeholder="Tanggal">
-					</div>
-				</div>
+					
 			</div>
 			<div class="col-2"></div>
 		</div>
@@ -70,7 +77,6 @@
 
 	<div class="content-box">
 		<div class="wrap">
-			<form></form>
 			<div class="clear"></div>
 		</div>
 	</div>
@@ -78,7 +84,19 @@
 	<div class="container anyEvent">
 		<div class="row">
 				<?php
-					$query = "SELECT * FROM events WheRE deleted = 0";
+					$nama = $_POST['searchByName'];
+					$kategori = $_POST['searchByKategori'];
+					
+					if (isset($nama)) {
+						$query = "SELECT * FROM events WHERE judul_event LIKE '%{$nama}%' AND deleted = 0";
+					}
+					else if(isset($kategori)){
+						$query = "SELECT * FROM events WHERE id_kategori = $kategori AND deleted = 0";
+					}
+					else{
+						$query = "SELECT * FROM events WHERE deleted = 0";
+					}
+					
 					$result = mysqli_query($con, $query);
 
 					if(mysqli_num_rows($result) > 0){

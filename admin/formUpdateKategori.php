@@ -134,7 +134,11 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
+                            <?php
+								echo $_SESSION['username'];
+							?>     
+                            <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
                             </div>
@@ -162,7 +166,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Jenis Kateogri</label>
                             <div class="col-md-9">
-                                <input type="text" name="nama" class="form-control" placeholder="Nama Kategori"  
+                                <input type="text" name="jenis" id="jenis" class="form-control" placeholder="Nama Kategori"  
                                 value="<?php echo $kategori["jenis_kategori"] ?>">       
                             </div>                     
                         </div>
@@ -223,6 +227,12 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script>
+        // clear form input
+        function clearForm() {
+            $('#jenis').val('');
+        }
+    </script>
 </body>
 
 </html>

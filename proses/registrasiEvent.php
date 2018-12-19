@@ -51,7 +51,7 @@ else{
         $query = "INSERT INTO tiket( id_users , id_events , status , deleted) VALUES ( '$id_users' , '$idEvents' , 0 , 0)";
         $query1 = "UPDATE users SET saldo = $bayar WHERE id_users = $id_users";
         
-        if ($saldo >= $bayar) {
+        if ($saldo >= $harga) {
             if(mysqli_query($con, $query) && mysqli_query($con, $query1)){
                 header("Location: ../tiket.php");
             }

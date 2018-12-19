@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include '../helper/koneksi.php';
     
@@ -44,12 +45,12 @@ if ($pass != '' && $confirm != '') {
     if ($pass == $confirm) {
         if (isset($nama_file)) {
             $query = "UPDATE users 
-                SET nama = '$nama', username = '$username', pass = '$pass',  email = '$email', gambar_profile = '$nama_file', saldo = '$saldo'
+                SET nama = '$nama', username = '$username', pass = '$pass',  email = '$email', gambar_profile = '$nama_file'
                 WHERE id_users = '$idUsers'";
             }
             else{
               $query = "UPDATE users 
-                SET nama = '$nama', username = '$username', pass = '$pass',  email = '$email', saldo = '$saldo'
+                SET nama = '$nama', username = '$username', pass = '$pass',  email = '$email'
                 WHERE id_users = '$idUsers'";
             }
     }
@@ -58,15 +59,20 @@ if ($pass != '' && $confirm != '') {
     }
         
 }
+else if(isset($saldo)){
+    $query = "UPDATE users 
+    SET saldo = '$saldo' WHERE id_users = '$idUsers'";
+}
+
 else{
     if (isset($nama_file)) {
         $query = "UPDATE users 
-            SET nama = '$nama', username = '$username',  email = '$email', gambar_profile = '$nama_file', saldo = '$saldo'
+            SET nama = '$nama', username = '$username',  email = '$email', gambar_profile = '$nama_file'
             WHERE id_users = '$idUsers'";
     }
     else{
       $query = "UPDATE users 
-        SET nama = '$nama', username = '$username',  email = '$email', saldo = '$saldo'
+        SET nama = '$nama', username = '$username',  email = '$email'
         WHERE id_users = '$idUsers'";
     }
 }

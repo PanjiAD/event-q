@@ -1,5 +1,5 @@
 <?php
-	include 'helper/koneksi.php';
+	include '../helper/koneksi.php';
 
 	session_start();
 	// session_destroy();
@@ -59,9 +59,9 @@
         <!-- sidebar menu area start -->
         <div class="sidebar-menu">
             <div class="sidebar-header">
-                <div class="logo">
-                    <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
-                </div>
+            <div class="logo">
+			    <a href="index.php"><img src="../gambar/eventcinemas-logo.png" alt="" /></a>
+		    </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
@@ -149,8 +149,74 @@
                     </div>
                 </div>
             </div>
-            <!-- page title area end -->
-            
+            <div class="container">
+                <h3 class="text-center mt-4">Data Event</h3>
+                <?php
+                $message = '';
+                if(isset($_GET["error"])){
+                    $message = $_GET["error"];
+                    echo " <p style='color:red; font-style:italic'>$message</p>";
+                }
+                ?>
+                <a href="formAddEvent.php" class="btn btn-success mt-2 mb-3" enctype="multipart/form-data">Tambah Event</a>
+                <!-- <div class="row"> -->
+                    <table id="barang" class="table table-stripped tex-center-mt-3" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Event</th>
+                                <th>Lokasi</th>
+                                <th>URL</th>
+                                <th>Poster Event</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Harga</th>
+                                <th>Peserta</th>
+                                <th>Deskripsi</th>
+                                <th>Nama Penyelenggara</th>
+                                <th>create_date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $query = "SELECT * FROM events WHERE deleted = 0";
+                            $result = mysqli_query($con, $query);
+
+                            if (mysqli_num_rows($result) > 0){
+                                $index = 1; 
+                                while($row = mysqli_fetch_assoc($result)){
+                                    $id_events = $row["id_events"];
+                                    echo "
+                                    <tr>
+                                    <td>" . $index++ . "</td>
+                                    <td>" .$row["judul_event"]. "</td>
+                                    <td>" .$row["lokasi"]. "</td>
+                                    <td>" .$row["urls"]. "</td>
+                                    <td> <img src='../gambar/".$row['gambar_event']."' style='width:100px;'> </td>
+                                    <td>" .$row["tanggal_mulai"]. ' - ' . $row["tanggal_akhir"] ."</td>
+                                    <td>" .$row["waktu_mulai"]. ' - ' . $row["waktu_akhir"] ."</td>
+                                    <td>" .$row["harga"]. "</td>
+                                    <td>" .$row["peserta"]. "</td>
+                                    <td>" .$row["deskripsi"]. "</td>
+                                    <td>" .$row["nama_penyelenggara"]. "</td>
+                                    <td>" .$row["create_date"]. "</td>
+                                    <td>
+                                        <a href='formUpdateEvent.php?id=$id_events
+                                        ' class='btn btn-warning'>Update</a>
+                                        <a href='../proses/deleteEvent.php?id=$id_events
+                                        ' class='btn btn-danger'>Delete</a>
+                                        </td>
+                                    </tr>
+                                 ";
+                                }
+                            }
+                            mysqli_close($con); 
+                            ?>
+                        </tbody>
+                    </table>
+                <!-- </div> -->
+            </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->

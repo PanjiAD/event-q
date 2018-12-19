@@ -10,6 +10,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Page Title</title>
     <?php include 'head.php'?>
@@ -24,17 +25,6 @@
                 <h4 style="margin-top:3px ; font-weight:100;">Buat acara yang inspiratif dan bermanfaat</h4>
             </div>
             <div class="col-6 headerAdd">
-                <!-- <div class="row ml-5">
-                    <a href="#">
-                        <div class="btnAdd"><p>Save</p></div>
-                    </a>
-                    <a href="#">
-                        <div class="btnAdd"><p>Prefiew</p></div>
-                    </a>
-                    <a href="#">
-                        <div class="btnAdd" style="background-color: #FE2232; color:white; border:1px solid transparent"><p>Kirim</p> </div>
-                    </a>
-                </div> -->
             </div>
         </div>
         <div class="bodyAdd">

@@ -27,33 +27,36 @@
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-8">
-				<div class="row">	
-					<div class="col-4">
-						<label for="event" class="mb-2" style="font-style:bold">Pencarian Event</label>
-						<input type="text" name="event" id="event" class="form-control" placeholder="Event">
-					</div>
-					<div class="col-4">
-						<label for="lokasi" class="mb-2" style="font-style:bold">Kategori</label>
-						<select name="kategori" cols="10" rows="5" class="form-control"> 
-                                    <?php
-                                        $query = "SELECT * FROM kategori WHERE deleted = 0";
-                                        $result = mysqli_query($con, $query);
-                                        if (mysqli_num_rows($result) > 0) {
-                                            $kategori = 1;
-                                            while($row = mysqli_fetch_assoc($result)){
-                                            ?>
-                                                <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?> </option>        
-                                    <?php
-                                            }
-                                        }
-                                    ?>
-                                </select>
-					</div>
-					<div class="col-4">
-					<label for="tanggal" class="mb-2" style="font-style:bold">Tanggal</label>
-						<input type="date" name="tanggal" id="tanggal" class="form-control" placeholder="Tanggal">
-					</div>
-				</div>
+			<form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
+						<div class="row">
+							<div class="col-4">
+								<label for="event" class="mb-2" style="font-style:bold">Pencarian Event</label>
+								<input type="text" name="search" class="form-control" placeholder="Event">
+							</div>
+							<div class="col-4">
+								<label for="lokasi" class="mb-2" style="font-style:bold">Kategori</label>
+								<div class="dropdown">
+ 									<select name="kategori" cols="10" rows="5" class="form-control" > 
+                    		            <?php
+                    		                $query = "SELECT * FROM kategori WHERE deleted = 0";
+                    		                $result = mysqli_query($con, $query);
+                    		                if (mysqli_num_rows($result) > 0) {
+                    		                    $kategori = 1;
+                    		                    while($row = mysqli_fetch_assoc($result)){
+                    		            ?>
+                    		                        <option value=" <?php echo $row['id_kategori']?>"> <?php echo $row['jenis_kategori']?></option>        
+                    		            <?php
+                    		                    }
+                    		                }
+                    		            ?>
+                    		            </select>
+								</div>
+							</div>
+							<div class="col-4 d-flex justify-content-center align-items-end">
+								<input type="submit" name="submit" value="Search" class="btn btn-success btn-block">
+							</div>
+						</div>
+					</form>
 			</div>
 			<div class="col-2"></div>
 		</div>
@@ -68,8 +71,22 @@
 
 	<div class="container anyEvent">
 		<div class="row">
-				<?php
-					$query = "SELECT * FROM events WHERE deleted = 0";
+		<?php
+					$nama = $_POST['search'];
+					$kategori = $_REQUEST['kategori'];
+					
+					if (isset($nama)) {
+						$query = "SELECT * FROM events WHERE judul_event LIKE '%{$nama}%' AND deleted = 0";
+					}
+					// die(isset($kategori));
+					else if(isset($kategori)){
+						$query = "SELECT * FROM events WHERE id_kategori = $kategori AND deleted = 0";
+						die($query);	
+					}
+					else{
+						$query = "SELECT * FROM events WHERE deleted = 0";
+					}
+					
 					$result = mysqli_query($con, $query);
 
 					if(mysqli_num_rows($result) > 0){
@@ -87,7 +104,7 @@
 									<p class="day">20</p>
 								</div>
 								<div class="col-9">
-								<div class="eventTitle">
+									<div class="eventTitle">
 										<h2> <?php echo $row['judul_event']; ?> </h2>
 									</div>
 									<p class="time"><?php echo $row['tanggal_mulai']; ?>, <?php echo $row['waktu_mulai']; ?></p>
@@ -101,7 +118,6 @@
 										echo 'Rp '.$row['harga'];	
 									}
 									 ?> </p>
-									
 								</div>	
 							</div>
   						</div>

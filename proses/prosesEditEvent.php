@@ -3,6 +3,8 @@
 include '../helper/koneksi.php';
     
 // Get the form update value
+$prev = $_SERVER['HTTP_REFERER'];
+
 $idEvents = $_POST["idEvents"];
 $judul_event = $_POST["judul"];
 $lokasi = $_POST["lokasi"];
@@ -31,7 +33,7 @@ $code = $_FILES["gambar"]["error"];
 
     $tipe_file = array("image/jpeg", "image/gif", "image/png");
     if(!in_array($_FILES["gambar"]["type"], $tipe_file))
-    {   
+    {
         echo "<script> alert('cek kembali ekstensi file anda (*.jpeg,*.jpg,*.png,*.gif,)'); window.location = '../editEvent.php?id=$idEvents';</script>";
         $upload_check = true;
     }
@@ -55,13 +57,23 @@ else{
 }
 
 
-
 // Do update query
-if (mysqli_query($con, $query)) {
-    header("Location: ../myEvent.php");
-} else {
-    echo "<script> alert('Data tidak berhasi di update'); window.location = '../editEvent.php?id=$idEvents';</script>";
+if ($prev == "http://localhost/web_project/admin/formUpdateEvent.php?id=$idEvents") {
+    if (mysqli_query($con, $query)) {
+        header("Location: ../admin/eventAdmin.php");
+    } else {
+        echo "<script> alert('Data tidak berhasi di update'); window.location = '../admin/formUpdateEvent.php?id=$idEvents';</script>";
+    }
 }
+else{
+    if (mysqli_query($con, $query)) {
+        header("Location: ../myEvent.php");
+    } else {
+        echo "<script> alert('Data tidak berhasi di update'); window.location = '../editEvent.php?id=$idEvents';</script>";
+    }
+}
+
+
 
 // close mysql connection
 mysqli_close($con); 

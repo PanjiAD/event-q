@@ -134,7 +134,11 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
+                            <?php
+								echo $_SESSION['username'];
+							?>     
+                            <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
                             </div>
@@ -162,36 +166,36 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Nama </label>
                             <div class="col-md-9">
-                                <input type="text" name="nama" class="form-control" placeholder="Nama User" required 
+                                <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama User" required 
                                 value="<?php echo $user["nama"] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Username</label>
                             <div class="col-md-9">
-                                <input type="text" name="username" class="form-control" placeholder="Username" required
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Username" required
                                 value="<?php echo $user["username"] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Email</label>
                             <div class="col-md-9">
-                                <input type="email" name="email" class="form-control" placeholder="Email" required
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
                                 value="<?php echo $user["email"] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Password</label>
                             <div class="col-md-9">
-                                <input type="text" name="pass" class="form-control" placeholder="Passowrd" required
+                                <input type="text" name="pass" id="pass" class="form-control" placeholder="Passowrd" required
                                 value="<?php echo $user["pass"] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Foto Profile</label>
                             <div class="col-md-9">
-                                <img style='width:250px;' src="../gambar/<?php echo($user["gambar_profile"]) ?>">
-                                <input type="hidden" name="gambar" value="<?php echo($user["gambar_profile"]) ?>">
+                                <img style='width:250px;' src="../gambar/profil/<?php echo($user["gambar_profile"]) ?>">
+                                <input type="hidden" name="gambar" id="gambar" value="<?php echo($user["gambar_profile"]) ?>">
                                 <input type="file" name="gambar">
                             </div>
                         </div>
@@ -252,6 +256,16 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script>
+        // clear form input
+        function clearForm() {
+            $('#nama').val('');
+            $('#username').val('');
+            $('#pass').val('');
+            $('#email').val('');
+            $('#gambar').val('');
+        }
+    </script>
 </body>
 
 </html>

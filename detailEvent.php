@@ -81,7 +81,16 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
                             echo '<a name="backBtn" id="backBtn" class="btn btn-dark btn-block mt-3" href="myEvent.php" role="button">Kembali</a>';
                         }
                         else {
-                            echo '<input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">';
+                    ?>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a name="backBtn" id="backBtn" class="btn btn-dark btn-block mt-3" href="indexUser.php" role="button">Kembali</a>;
+                                </div>
+                                <div class="col-6">
+                                    <input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">;
+                                </div>
+                            </div>
+                    <?php
                         }
                     ?>
             </form> 

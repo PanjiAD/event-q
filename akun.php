@@ -72,26 +72,28 @@
                             </div>
                         </div>
                     <div class="form-group row isi">
-                        <label class="col-md-5">Username</label>
-                        <div class="col-md-6">
+                        <label class="col-md-4">Username</label>
+                        <div class="col-md-8">
                             <div class="username">: <?php echo $user['username']?></div>       
                         </div>                     
                     </div>
                     <div class="form-group row isi">
-                        <label class="col-md-5">Email</label>
-                        <div class="col-md-6">       
+                        <label class="col-md-4">Email</label>
+                        <div class="col-md-8">       
                             <div class="email">: <?php echo $user['email']?> </div>
                         </div>                     
                     </div>
                     <div class="form-group row isi">
-                        <label class="col-md-5">Saldo</label>
-                        <div class="col-md-6">       
-                            <div class="saldo">: Rp <?php echo $user['saldo']?> </div>
+                        <label class="col-md-4">Saldo</label>
+                        <div class="col-md-8">       
+                            <div class="saldo">: Rp <?php echo $user['saldo']?>
+                                <button type="button" class="btn" data-toggle="modal" data-target="#editRekening" ><i class="fas fa-donate"></i> Top Up</button>
+                            </div>
                         </div>                     
                     </div>
                     <div class="form-group row isi">
-                        <label class="col-md-5">Jumlah event </label>
-                        <div class="col-md-6">       
+                        <label class="col-md-4">Jumlah event </label>
+                        <div class="col-md-8">       
                             <div class="event">:
                             <?php
                                 $user1 = $user['id_users'];
@@ -105,8 +107,8 @@
                         </div>                     
                     </div>
                     <div class="form-group row isi">
-                        <label class="col-md-5">Jumlah Tiket </label>
-                        <div class="col-md-6">       
+                        <label class="col-md-4">Jumlah Tiket </label>
+                        <div class="col-md-8">       
                             <div class="tiket">: 
                             <?php 
                                 $tiket = "SELECT COUNT(id_users) AS tikets FROM tiket WHERE id_users = '$user1'";
@@ -176,12 +178,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                          <label for="recipient-name" class="col-form-label">Saldo:</label>
-                          <input type="number" name="saldo" class="form-control" value="<?php echo $user["saldo"] ?>" placeholder="Saldo" required>
-                        </div>
                     </div>
             </div>
+       </div>
+      <div class="modal-footer">
+            <input type="submit" name="submit" value="Kirim Perubahan" class="btn btn-success">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editRekening" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Akun</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="proses/editAkun.php" method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+        <input type="hidden" name="idUsers" value="<?php echo $user["id_users"] ?>">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Saldo:</label>
+                  <input type="number" name="saldo" class="form-control" value="<?php echo $user["saldo"] ?>" placeholder="Saldo" required>
+                </div>
        </div>
       <div class="modal-footer">
             <input type="submit" name="submit" value="Kirim Perubahan" class="btn btn-success">
