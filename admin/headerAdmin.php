@@ -1,6 +1,4 @@
-<div id="preloader">
-        <div class="loader"></div>
-    </div>
+
 <div class="page-container">
         <!-- sidebar menu area start -->
         <div class="sidebar-menu">
@@ -43,7 +41,7 @@
                         </div>
                         <div class="search-box pull-left">
                             <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
+                                <input type="text" id="search" name="search" placeholder="Search..." required>
                                 <i class="ti-search"></i>
                             </form>
                         </div>

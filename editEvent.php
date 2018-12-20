@@ -101,19 +101,7 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
                         </div>
                         <div class="form-group mt-4">
                             <label for="harga" class="mb-2">Harga Tiket</label></br>
-                            <div class="row">
-                                <div class="col-3">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optradio">Free
-                                    </label>
-                                    <label class="radio-inline ">
-                                        <input type="radio" name="optradio">Berbayar
-                                    </label>
-                                </div>  
-                                <div class="col-9">
-                                    <input type="number" name="harga" class="form-control" value="<?php echo $event["harga"] ?>" placeholder="Masukkan harga tiket">
-                                </div>  
-                            </div>
+                            <input type="number" name="harga" class="form-control" value="<?php echo $event["harga"] ?>" placeholder="Masukkan harga tiket">
                         </div>
                         <div class="form-group mt-4">
 					    	<label for="peserta" class="mb-2">Peserta</label>

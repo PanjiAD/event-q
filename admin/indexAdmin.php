@@ -1,23 +1,16 @@
 <?php
-	include 'helper/koneksi.php';
-
+    include '../helper/koneksi.php';
 	session_start();
 	// session_destroy();
 
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-		if($_SESSION['idusers_level'] == '2'){
-			header("location: ../indexUser.php");	
-		}
+        if ($_SESSION['idusers_level'] == '2') {
+            header("location: ../indexUser.php");
+        }
+        else if ($_SESSION['idusers_level'] == '') {
+            header("location: ../index.php");
+        }
 	}
-	else {
-		header("location: ../login.php");
-	}
-    // if (isset($_GET['pesan'])) {
-    //     $mess = "<p> {$_GET['pesan']}</p>";
-    // }
-    // else{
-    //     $mess = " ";
-    // };
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -25,7 +18,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Event.com | Dashboard</title>
+    <title>Event.com | User Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -47,24 +40,40 @@
 
 <body>
 <?php include 'headerAdmin.php'?>
-        <div class="page-title-area">
+            <!-- page title area start -->
+            <div class="page-title-area">
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
                             <h4 class="page-title pull-left">Tables</h4>
                             <ul class="breadcrumbs pull-left">
                                 <!-- <li><a href="index.html">Home</a></li> -->
-                                <li><span>Event</span></li>
+                                <li><span>User</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
+
+                        <?php
+                                $user = $_SESSION['username'];
+								$query = "SELECT gambar_profile,id_users FROM users WHERE username = '$user'";
+								$result = mysqli_query($con, $query);
+
+								if(mysqli_num_rows($result) == 1) {
+									$username = mysqli_fetch_assoc($result);
+							?>
+									<img src="../gambar/profil/<?=$username['gambar_profile']?>" style="width:40px;" class="mr-2"/>
+							<?php							
+								} else {
+									echo "User tidak ditemukan";
+								}
+							?>
+
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
                             <?php
 								echo $_SESSION['username'];
-							?> 
+							?>     
                             <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../logout.php">Log Out</a>
@@ -74,13 +83,15 @@
                 </div>
             </div>
             <!-- page title area end -->
-            
+            <div class="container">
+                
+            </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
+                <p>© Website Event Booking by <a href="https://github.com/PanjiAD" target="_blank"> Panji Awwaludi D ( 19 )</a></p>
             </div>
         </footer>
         <!-- footer area end-->
@@ -94,6 +105,10 @@
     <script src="assets/js/metisMenu.min.js"></script>
     <script src="assets/js/jquery.slimscroll.min.js"></script>
     <script src="assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Data tables -->
+    <script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
@@ -112,6 +127,18 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
+
+    <script>
+        table = $('#user').DataTable({
+            "lengthMenu": [5, 10,20, 70],
+            "pageLength": 5,
+            dom: '<t><p>'
+        });  
+        $('#search').keyup(function(){
+            table.search($(this).val()).draw() ;
+        });
+        
+    </script>
 </body>
 
 </html>

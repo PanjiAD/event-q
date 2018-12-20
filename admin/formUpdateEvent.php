@@ -50,7 +50,8 @@
 </head>
 
 <body>
-<?php include 'headerAdmin.php'?>
+
+        <?php include 'headerAdmin.php'?>
             <div class="page-title-area">
                 <div class="row align-items-center">
                     <div class="col-sm-6">
@@ -64,7 +65,20 @@
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
+                            <?php
+                                $user = $_SESSION['username'];
+								$query = "SELECT gambar_profile,id_users FROM users WHERE username = '$user'";
+								$result = mysqli_query($con, $query);
+
+								if(mysqli_num_rows($result) == 1) {
+									$username = mysqli_fetch_assoc($result);
+							?>
+									<img src="../gambar/profil/<?=$username['gambar_profile']?>" style="width:40px;" class="mr-2"/>
+							<?php							
+								} else {
+									echo "User tidak ditemukan";
+								}
+							?>
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
                             <?php
 								echo $_SESSION['username'];
@@ -155,19 +169,7 @@
                         </div>
                         <div class="form-group mt-4">
                             <label for="harga" class="mb-2">Harga Tiket</label></br>
-                            <div class="row">
-                                <div class="col-3">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optradio">Free
-                                    </label>
-                                    <label class="radio-inline ">
-                                        <input type="radio" name="optradio">Berbayar
-                                    </label>
-                                </div>  
-                                <div class="col-9">
-                                    <input type="number" name="harga" class="form-control" value="<?php echo $event["harga"] ?>" placeholder="Masukkan harga tiket">
-                                </div>  
-                            </div>
+                            <input type="number" name="harga" class="form-control" value="<?php echo $event["harga"] ?>" placeholder="Masukkan harga tiket">
                         </div>
                         <div class="form-group mt-4">
 					    	<label for="peserta" class="mb-2">Peserta</label>
@@ -190,7 +192,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
+                <p>© Website Event Booking by <a href="https://github.com/PanjiAD" target="_blank"> Panji Awwaludi D ( 19 )</a></p>
             </div>
         </footer>
         <!-- footer area end-->
@@ -205,6 +207,9 @@
     <script src="assets/js/jquery.slimscroll.min.js"></script>
     <script src="assets/js/jquery.slicknav.min.js"></script>
 
+    <!-- Data tables -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <!-- start highcharts js -->

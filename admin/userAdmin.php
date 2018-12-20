@@ -39,69 +39,7 @@
 </head>
 
 <body>
-<div id="preloader">
-        <div class="loader"></div>
-    </div>
-<div class="page-container">
-        <!-- sidebar menu area start -->
-        <div class="sidebar-menu">
-            <div class="sidebar-header">
-            <div class="logo">
-			    <a href="index.php"><img src="../gambar/eventcinemas-logo.png" alt="" /></a>
-		    </div>
-            </div>
-            <div class="main-menu">
-                <div class="menu-inner">
-                    <nav>
-                        <ul class="metismenu" id="menu">
-                            <li class="active">
-                                <a href="dashboard.php" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Tables
-                                    </span></a>
-                                <ul class="collapse">
-                                    <li><a href="eventAdmin.php"> Event </a></li>
-                                    <li><a href="userAdmin.php"> User </a></li>
-                                    <li><a href="kategoriAdmin.php"> Kategori </a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="main-content">
-            <!-- header area start -->
-            <div class="header-area">
-                <div class="row align-items-center">
-                    <!-- nav and search button -->
-                    <div class="col-md-6 col-sm-8 clearfix">
-                        <div class="nav-btn pull-left">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="search-box pull-left">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
-                                <i class="ti-search"></i>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- profile info & task notification -->
-                    <div class="col-md-6 col-sm-4 clearfix">
-                        <ul class="notification-area pull-right">
-                            <li id="full-view"><i class="ti-fullscreen"></i></li>
-                            <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                            
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- header area end -->
-            <!-- page title area start -->
-            
+<?php include 'headerAdmin.php'?>
             <!-- page title area start -->
             <div class="page-title-area">
                 <div class="row align-items-center">
@@ -156,7 +94,7 @@
                 ?>
                 <a href="formAddUser.php" class="btn btn-success mt-2 mb-3" enctype="multipart/form-data">Tambah User</a>
                 <!-- <div class="row"> -->
-                    <table id="barang" class="table table-stripped tex-center-mt-3" style="width:100%">
+                    <table id="user" class="table table-stripped tex-center-mt-3" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -209,7 +147,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
+                <p>© Website Event Booking by <a href="https://github.com/PanjiAD" target="_blank"> Panji Awwaludi D ( 19 )</a></p>
             </div>
         </footer>
         <!-- footer area end-->
@@ -223,6 +161,10 @@
     <script src="assets/js/metisMenu.min.js"></script>
     <script src="assets/js/jquery.slimscroll.min.js"></script>
     <script src="assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Data tables -->
+    <script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
@@ -241,6 +183,18 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
+
+    <script>
+        table = $('#user').DataTable({
+            "lengthMenu": [5, 10,20, 70],
+            "pageLength": 5,
+            dom: '<t><p>'
+        });  
+        $('#search').keyup(function(){
+            table.search($(this).val()).draw() ;
+        });
+        
+    </script>
 </body>
 
 </html>

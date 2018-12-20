@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="assets/css/metisMenu.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- Data tables -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- others css -->
@@ -60,7 +63,21 @@
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
+                        <?php
+                                $user = $_SESSION['username'];
+								$query = "SELECT gambar_profile,id_users FROM users WHERE username = '$user'";
+								$result = mysqli_query($con, $query);
+
+								if(mysqli_num_rows($result) == 1) {
+									$username = mysqli_fetch_assoc($result);
+							?>
+									<img src="../gambar/profil/<?=$username['gambar_profile']?>" style="width:40px;" class="mr-2"/>
+							<?php							
+								} else {
+									echo "User tidak ditemukan";
+								}
+							?>
+                            
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
                             <?php
 								echo $_SESSION['username'];
@@ -142,19 +159,7 @@
                         </div>
                         <div class="form-group mt-4">
                             <label for="harga" class="mb-2">Harga Tiket</label></br>
-                            <div class="row">
-                                <div class="col-3">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optradio">Free
-                                    </label>
-                                    <label class="radio-inline ml-3">
-                                        <input type="radio" name="optradio">Berbayar
-                                    </label>
-                                </div>  
-                                <div class="col-9">
-                                    <input type="number" name="harga" class="form-control" placeholder="Masukkan harga tiket">
-                                </div>  
-                            </div>
+                            <input type="number" name="harga" class="form-control" placeholder="Masukkan harga tiket">
                         </div>
                         <div class="form-group mt-4">
 					    	<label for="peserta" class="mb-2">Peserta</label>
@@ -165,8 +170,15 @@
 					    	<input type="text" name="instansi" class="form-control" placeholder="Masukkan nama penyelenggara acara" required>
                         </div>
                         <div class="form-group mb-4 mt-4" >
-                        <input type="submit" name="submit" value="Kirim" class="btn btn-success btn-block">
-					</div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a name="backBtn" id="backBtn" class="btn btn-dark btn-block" href="eventAdmin.php" role="button">Kembali</a>
+                                </div>
+                                <div class="col-6">
+                                    <input type="submit" name="submit" value="Kirim" class="btn btn-success btn-block">
+                                </div>            
+                            </div>
+					    </div>
                     </form>
                 </div>
                 <div class="col-2"></div>
@@ -177,7 +189,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
+                <p>© Website Event Booking by <a href="https://github.com/PanjiAD" target="_blank"> Panji Awwaludi D ( 19 )</a></p>
             </div>
         </footer>
         <!-- footer area end-->
