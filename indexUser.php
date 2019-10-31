@@ -89,14 +89,16 @@
 					$nama = $_POST['searchByName'];
 					$kategori = $_POST['searchByKategori'];
 
+					$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
+
 					if (isset($nama)) {
-						$query = "SELECT * FROM events WHERE judul_event LIKE '%{$search}%' AND deleted = 0";
+						$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.judul_event LIKE '%{$search}%' AND u.deleted = 0 AND e.deleted = 0";
 					}
 					else if(isset($kategori)){
-						$query = "SELECT * FROM events WHERE id_kategori = $jenis AND deleted = 0";
+						$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = $jenis AND u.deleted = 0 AND e.deleted = 0";
 					}
 					else{
-						$query = "SELECT * FROM events WHERE deleted = 0";
+						$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
 					}
 					
 					$result = mysqli_query($con, $query);
@@ -132,6 +134,17 @@
 									 ?> </p>
 								</div>	
 							</div>
+							<p class="time"><?php echo $row['tanggal_mulai']; ?>, <?php echo $row['waktu_mulai']; ?></p>
+							<p class="place"> <?php echo $row['lokasi']; ?> </p>
+							<p class="status_ticket">
+							<?php 
+							if ($row['harga'] == 0) {
+								echo 'free';
+							}
+							else{
+								echo 'Rp '.$row['harga'];	
+							}
+							 ?> </p>
   						</div>
 					</div>
 					</div>

@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Event.com | User Data</title>
+    <title>Event.com | Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -45,10 +45,8 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Tables</h4>
+                            <h4 class="page-title pull-left">Dashboard</h4>
                             <ul class="breadcrumbs pull-left">
-                                <!-- <li><a href="index.html">Home</a></li> -->
-                                <li><span>User</span></li>
                             </ul>
                         </div>
                     </div>
@@ -83,8 +81,56 @@
                 </div>
             </div>
             <!-- page title area end -->
-            <div class="container">
-                
+            <div class="container dashboard mt-5">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-8 tabel">
+                                <h3>Total Tiket</h3>
+                                <span class="hasil">
+                                    <?php
+                                        $total = "SELECT COUNT(id_tiket) AS total FROM tiket";
+                                        $result = mysqli_query($con, $total);
+                                        $row = mysqli_fetch_assoc($result);
+                                        echo $row['total'];
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                    <div class="col-2"></div>
+                        <div class="col-8 tabel">
+                            <h3>Total Event</h3>
+                            <span class="hasil">
+                                <?php
+                                    $total = "SELECT COUNT(id_events) AS total FROM events";
+                                    $result = mysqli_query($con, $total);
+                                    $row = mysqli_fetch_assoc($result);
+                                    echo $row['total'];
+                                ?>
+                            </span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-4"></div>
+                    <div class="col-4 tabel">
+                        <h3>Total User</h3>
+                        <span class="hasil">
+                            <?php
+                                $total = "SELECT COUNT(id_users) AS total FROM users";
+                                $result = mysqli_query($con, $total);
+                                $row = mysqli_fetch_assoc($result);
+                                echo $row['total'];
+                            ?>
+                        </span>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
             </div>
         </div>
         <!-- main content area end -->
