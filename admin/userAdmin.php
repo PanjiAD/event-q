@@ -102,6 +102,7 @@
                                 <th>Username</th>
                                 <th>Password</th>
                                 <th>Email</th>
+                                <th>Saldo</th>
                                 <th>Gambar_Profil</th>
                                 <th>Tanggal_Pembuatan</th>
                                 <th>Action</th>
@@ -124,6 +125,7 @@
                                     <td>" .$row["username"]. "</td>
                                     <td>" .$row["pass"]. "</td>
                                     <td width='10%'>" .$row["email"]. "</td>
+                                    <td>".$row["saldo"]."</td>
                                     <td> <img src='../gambar/profil/".$row['gambar_profile']."' style='width:70px;'> </td>
                                     <td>" .$row["create_date"]. "</td>
                                     <td>

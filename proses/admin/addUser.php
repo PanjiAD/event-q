@@ -7,7 +7,7 @@
     $password = $_POST["password"];
     $date = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO users(nama, username, pass, email, create_date, idusers_level, deleted) VALUES ('$nama', '$username', '$password', '$email', '$date', 2, 0)";
+    $query = "INSERT INTO users(nama, username, pass, email, create_date, saldo, deleted, idusers_level) VALUES ('$nama', '$username', '$password', '$email' , '$date', 0, 0, 2)";
 
         if(mysqli_query($con, $query)){
             header("Location: ../../admin/userAdmin.php");

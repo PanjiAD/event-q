@@ -111,15 +111,15 @@
 					<?php echo" <a href='detailEvent.php?id=$id_events'><img class='card-img-top' src='gambar/" .$row['gambar_event']."' alt='Card image cap'></a>"?>
   						<div class="card-body">
   						  	<div class="row">
-								<div class="col-3">
-									<p class="month">Jan</p>
-									<p class="day">20</p>
-								</div>
-								<div class="col-9">
+								<div class="col-6">
+									<!-- <p class="month">Jan</p>
+									<p class="day">20</p> -->
 									<div class="eventTitle">
 										<h2> <?php echo $row['judul_event']; ?> </h2>
 									</div>
 									<p class="time"><?php echo $row['tanggal_mulai']; ?>, <?php echo $row['waktu_mulai']; ?></p>
+								</div>
+								<div class="col-6">
 									<p class="place"> <?php echo $row['lokasi']; ?> </p>
 									<p class="status_ticket">
 									<?php 

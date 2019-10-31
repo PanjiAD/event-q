@@ -23,7 +23,7 @@ if (!empty($_POST["username"]) || !empty($_POST["password"])) {
                 $_SESSION["username"] = $username;
                 $_SESSION["idusers_level"] = $level;
                 $_SESSION["id_users"] = $idkategori;
-                header("Location: ../admin/indexAdmin.php");
+                header("Location: ../admin/eventAdmin.php");
             } 
             else {
                 $_SESSION["username"] = $username;
