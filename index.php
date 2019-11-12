@@ -9,11 +9,10 @@
         if ($_SESSION['idusers_level'] == '1') {
             header("location: admin/indexAdmin.php");
 		}
-// 		
 		else if($_SESSION['idusers_level'] == '2'){
 			header("location: indexUser.php");	
 		}
-	}
+    }
 ?>
 
 <!DOCTYPE html>
