@@ -1,17 +1,18 @@
 
 <?php
-	include 'helper/koneksi.php';
+    include 'helper/koneksi.php';
 
-	session_start();
-	// session_destroy();
+    session_start();
+    $_SESSION["idusers_level"] = null;
+	
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
         if ($_SESSION['idusers_level'] == '1') {
             header("location: admin/indexAdmin.php");
-		}
-		else if($_SESSION['idusers_level'] == '2'){
+	}		
+	else if($_SESSION['idusers_level'] == '2'){
 			header("location: indexUser.php");	
-		}
 	}
+    }
 ?>
 
 <!DOCTYPE html>
