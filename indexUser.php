@@ -3,7 +3,7 @@
 	include 'helper/koneksi.php';
 
 	session_start();
-	// session_destroy();
+	
 	if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
         if ($_SESSION['idusers_level'] == '1') {
             header("location: admin/indexAdmin.php");
@@ -12,7 +12,6 @@
 	else {
 		header("location: login.php");
 	}
-    
 ?>
 
 <!DOCTYPE html>
