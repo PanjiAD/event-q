@@ -1,13 +1,15 @@
 
 <?php
 	include 'helper/koneksi.php';
-
+	
 	session_start();
-	// session_destroy();
+	$_SESSION["idusers_level"] = null;
+	
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
         if ($_SESSION['idusers_level'] == '1') {
             header("location: admin/indexAdmin.php");
 		}
+// 		
 		else if($_SESSION['idusers_level'] == '2'){
 			header("location: indexUser.php");	
 		}
@@ -135,17 +137,6 @@
 									 ?> </p>
 								</div>	
 							</div>
-							<p class="time"><?php echo $row['tanggal_mulai']; ?>, <?php echo $row['waktu_mulai']; ?></p>
-							<p class="place"> <?php echo $row['lokasi']; ?> </p>
-							<p class="status_ticket">
-							<?php 
-							if ($row['harga'] == 0) {
-								echo 'free';
-							}
-							else{
-								echo 'Rp '.$row['harga'];	
-							}
-							 ?> </p>	
   						</div>
 					</div>
 					</div>

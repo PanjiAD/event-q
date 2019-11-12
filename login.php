@@ -4,7 +4,7 @@
 	<?php
     session_start();
     // session_destroy();
-
+	$_SESSION['idusers_level'] = null;
     if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 		
         if ($_SESSION['idusers_level'] == '1') {
