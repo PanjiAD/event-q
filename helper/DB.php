@@ -1,6 +1,5 @@
 <?php
-    define("HOST", "localhost");
-    define("UNAME", "phpmyadmin");
-    define("PASS", "123");
-    define("DB", "db_event");
-?>
+define("HOST", "localhost");
+define("UNAME", "root");
+define("PASS", "");
+define("DB", "db_event");

@@ -18,57 +18,55 @@ $optradio = $_POST["optradio"];
 $harga = $_POST["harga"];
 $peserta = $_POST["peserta"];
 $instansi = $_POST["instansi"];
+$no_rekening = $_POST["no_rekening"];
+$nama_bank = $_POST["nama_bank"];
+$nama_rekening = $_POST["nama_rekening"];
+$nominal_pajak = (10 / 100) * $_POST["harga"];
 $kategori = $_POST["kategori"];
 $id_users = $_SESSION["id_users"];
 
 $date = date('Y-m-d');
-   
+
 // H:i:s
 $code = $_FILES["file"]["error"];
-    if ($code == 0) {
-        $pesan = "";
-        $nama_folder="gambar";
-        $tmp = $_FILES["file"]["tmp_name"];
-        $nama_file=$_FILES["file"]["name"];
-        $path = "../$nama_folder/$nama_file";
+if ($code == 0) {
+    $pesan = "";
+    $nama_folder = "gambar";
+    $tmp = $_FILES["file"]["tmp_name"];
+    $nama_file = $_FILES["file"]["name"];
+    $path = "../$nama_folder/$nama_file";
 
-        $tipe_file = array("image/jpeg", "image/gif", "image/png");
-        if (!in_array($_FILES["file"]["type"],$tipe_file)) {
-            $error = urldecode("tipe file salah");
-            header("Location:../addEvent.php?error=$error");
-            die();
-        }
-
-        if (move_uploaded_file($tmp,$path)) {
-            $error = "Upload Sukses";
-        }
- 
-    } elseif ($code === 4) {
-        echo "<script> alert('Gagal upload gambar'); window.location = '../addEvent.php';</script>";
-    } else {
-        echo "<script> alert('Data tidak berhasil di update'); window.location = '../addEvent.php';</script>";
+    $tipe_file = array("image/jpeg", "image/gif", "image/png");
+    if (!in_array($_FILES["file"]["type"], $tipe_file)) {
+        $error = urldecode("tipe file salah");
+        header("Location:../addEvent.php?error=$error");
+        die();
     }
 
-$query = "INSERT INTO events( judul_event , lokasi , urls , gambar_event , tanggal_mulai , tanggal_akhir , waktu_mulai , waktu_akhir , harga , peserta, deskripsi , create_date , nama_penyelenggara , deleted, id_users, id_kategori) VALUES ( '$judul_event' , '$lokasi' , '$url' , '$nama_file' , '$tanggal_mulai' , '$tanggal_akhir' , '$waktu_mulai' , '$waktu_akhir' , '$harga' , '$peserta', '$deskripsi' , '$date' , '$instansi' , 0 , '$id_users' , '$kategori' )";
+    if (move_uploaded_file($tmp, $path)) {
+        $error = "Upload Sukses";
+    }
+} elseif ($code === 4) {
+    echo "<script> alert('Gagal upload gambar'); window.location = '../addEvent.php';</script>";
+} else {
+    echo "<script> alert('Data tidak berhasil di update'); window.location = '../addEvent.php';</script>";
+}
+
+$query = "INSERT INTO events( judul_event , lokasi , urls , gambar_event , tanggal_mulai , tanggal_akhir , waktu_mulai , waktu_akhir , harga , peserta, deskripsi , create_date , nama_penyelenggara, no_rekening, nama_bank, nama_rekening, nominal_pajak, deleted, id_users, id_kategori) VALUES ( '$judul_event' , '$lokasi' , '$url' , '$nama_file' , '$tanggal_mulai' , '$tanggal_akhir' , '$waktu_mulai' , '$waktu_akhir' , '$harga' , '$peserta', '$deskripsi' , '$date' , '$instansi','$no_rekening','$nama_bank','$nama_rekening',$nominal_pajak , 0 , '$id_users' , '$kategori' )";
 
 
 if ($prev == 'http://localhost/web_project/admin/formAddEvent.php') {
-    if(mysqli_query($con, $query)){
+    if (mysqli_query($con, $query)) {
         header("Location:../admin/eventAdmin.php");
-    }
-    else{
+    } else {
         echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../admin/eventAdmin.php';</script>";
     }
-}
-
-else{
-    if(mysqli_query($con, $query)){
+} else {
+    if (mysqli_query($con, $query)) {
         header("Location:../indexUser.php");
-    }
-    else{
+    } else {
         echo "<script> alert('Data tidak berhasil di tambahkan'); window.location = '../addEvent.php';</script>";
     }
 }
 
 mysqli_close($con);
-?>
