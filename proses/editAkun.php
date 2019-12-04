@@ -5,15 +5,54 @@ include '../helper/koneksi.php';
     
 // Get the form update value
 $idUsers = $_POST["idUsers"];
-$nama = $_POST["nama"];
-$username = $_POST["username"];
-$email = $_POST["email"];
-$pass = $_POST["pass"];
-$saldo = $_POST["saldo"];
-$confirm = $_POST["confirm"];
-$gambar = $_POST["gambar"];
 
-$code = $_FILES["gambar"]["error"];
+if(empty($_POST["nama"])){
+    $nama = null;
+}else{
+    $nama = $_POST["nama"];    
+}
+
+if(empty($_POST["username"])){
+    $username = null;
+}else {
+    $username = $_POST["username"];    
+}
+
+if(empty($_POST["email"])){
+    $email = null;
+} else {
+    $email = $_POST["email"];
+}
+
+if(empty($_POST["pass"])){
+    $pass = null;
+} else {
+    $pass = $_POST["pass"];
+}
+
+if(empty($_POST["saldo"])){
+    $saldo = null;
+} else {
+    $saldo = $_POST["saldo"];
+}
+
+if(empty($_POST["confirm"])){
+    $confirm = null;
+}else {
+    $confirm = $_POST["confirm"];    
+}
+
+if(empty($_POST["gambar"])){
+    $gambar = null;
+}else{
+    $gambar = $_POST["gambar"];    
+}
+
+if(empty($_FILES["gambar"]["error"])){
+    $code = null;    
+} else{
+    $code = $_FILES["gambar"]["error"];
+}
   if($code === 0){
 
     $nama_folder = "gambar/profil";

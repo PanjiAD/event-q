@@ -31,7 +31,6 @@ else {
     echo "<script> alert('User tidak ditemukan'); window.location = '../detailEvent.php?id=$idEvents';</script>";
 }
 
-
 if ($regis1 == $id_users) {
     echo "<script> alert('Maaf, Anda tidak bisa mendaftar pada acara anda sendiri'); window.location = '../detailEvent.php?id=$idEvents';</script>";
 }
@@ -68,9 +67,5 @@ else{
     else{
         echo "<script> alert('Kuota peserta telah habis'); window.location = '../detailEvent.php?id=$idEvents';</script>";
     }
-
-    
 }
-    
-
 ?>

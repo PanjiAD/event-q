@@ -24,7 +24,7 @@
 								<a class="nav-link" href="addEvent.php">Buat Acara</a>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="akun" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="nav-link dropdown-toggle" href="#" id="akun" name="avatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<?php
 									$user = $_SESSION['username'];
 									$query = "SELECT gambar_profile,id_users FROM users WHERE username = '$user'";
