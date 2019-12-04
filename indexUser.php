@@ -81,28 +81,42 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 	<div class="container anyEvent">
 		<div class="row">
 			<?php
-			$search = $_POST['search'];
-			$jenis = $_POST['kategori'];
-			$nama = $_POST['searchByName'];
-			$kategori = $_POST['searchByKategori'];
+				if(empty($_POST['search']) && empty($_POST['searchByName'])){
+					$cari = null;
+					$nama = null;
+				}else{
+					$cari = $_POST['search'];
+					$nama = $_POST['searchByName'];
+				}
+
+
+				if(empty($_POST['searchByKategori']) && empty($_REQUEST['kategori'])){
+				  $kategori = null;
+				  $jenis = null;
+				} else {
+					$jenis = $_REQUEST['kategori'];
+					$kategori = $_POST['searchByKategori'];
+				}
 
 			// $query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
 
-			// if (isset($nama)) {
-			// 	$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.judul_event LIKE '%{$search}%' AND u.deleted = 0 AND e.deleted = 0";
-			// }
-			// // die(isset($kategori));
-			// else if (isset($kategori)) {
-			// 	$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = $jenis AND u.deleted = 0 AND e.deleted = 0";
-			// } else {
-			// 	$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
-			// }
+			
 
 
 			if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
-				echo ("login");
+				// echo ("login");
 				$queryAi = "SELECT count(k.id_kategori) AS jumlah, k.id_kategori FROM events AS e INNER JOIN tiket AS t ON e.id_events = t.id_events INNER JOIN kategori AS k ON e.id_kategori = k.id_kategori WHERE t.id_users = " . $_SESSION["id_users"] . " GROUP BY k.id_kategori ORDER BY jumlah DESC";
-
+				
+				// if (isset($nama)) {
+				// 	$queryAi = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.judul_event LIKE '%{$cari}%' AND u.deleted = 0 AND e.deleted = 0";
+				// }
+				// // die(isset($kategori));
+				// else if (isset($kategori)) {
+				// 	$queryAi = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = $jenis AND u.deleted = 0 AND e.deleted = 0";
+				// } else {
+				// 	$queryAi = "SELECT count(k.id_kategori) AS jumlah, k.id_kategori FROM events AS e INNER JOIN tiket AS t ON e.id_events = t.id_events INNER JOIN kategori AS k ON e.id_kategori = k.id_kategori WHERE t.id_users = " . $_SESSION["id_users"] . " GROUP BY k.id_kategori ORDER BY jumlah DESC";
+				// }
+				
 				$resultAi = mysqli_query($con, $queryAi);
 
 				if (mysqli_num_rows($resultAi) > 0) {
@@ -132,12 +146,13 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 													<p class="place"> <?php echo $row['lokasi']; ?> </p>
 													<p class="status_ticket">
 														<?php
-																			if ($row['harga'] == 0) {
-																				echo 'free';
-																			} else {
-																				echo 'Rp ' . $row['harga'];
-																			}
-																			?> </p>
+															if ($row['harga'] == 0) {
+																echo 'free';
+															} else {
+																echo 'Rp ' . $row['harga'];
+															}
+														?> 
+													</p>
 												</div>
 											</div>
 										</div>
@@ -149,7 +164,7 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 								}
 							}
 						} else {
-							echo ("ga login");
+							// echo ("ga login");
 
 							$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
 
@@ -178,12 +193,13 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 											<p class="place"> <?php echo $row['lokasi']; ?> </p>
 											<p class="status_ticket">
 												<?php
-															if ($row['harga'] == 0) {
-																echo 'free';
-															} else {
-																echo 'Rp ' . $row['harga'];
-															}
-															?> </p>
+													if ($row['harga'] == 0) {
+														echo 'free';
+													} else {
+														echo 'Rp ' . $row['harga'];
+													}
+												?> 
+											</p>
 										</div>
 									</div>
 								</div>

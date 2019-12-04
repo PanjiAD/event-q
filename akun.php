@@ -23,7 +23,7 @@
 	} else {
         echo "Event tidak ditemukan";
     }
-    ?>
+?>
 
 <!DOCTYPE html>
 <html>
