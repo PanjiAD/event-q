@@ -102,8 +102,6 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 
 			// $query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
 
-			
-
 			if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 				// echo ("login");
 				$queryAi = "SELECT count(k.id_kategori) AS jumlah, k.id_kategori
@@ -173,15 +171,15 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 
 							$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
 
-							// if (isset($nama)) {
-							// 	$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.judul_event LIKE '%{$cari}%' AND u.deleted = 0 AND e.deleted = 0";
-							// }
-							// // die(isset($kategori));
-							// else if (isset($kategori)) {
-							// 	$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = $jenis AND u.deleted = 0 AND e.deleted = 0";
-							// } else {
-							// 	$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
-							// }
+							if (isset($nama)) {
+								$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.judul_event LIKE '%{$cari}%' AND u.deleted = 0 AND e.deleted = 0";
+							}
+							// die(isset($kategori));
+							else if (isset($kategori)) {
+								$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = $jenis AND u.deleted = 0 AND e.deleted = 0";
+							} else {
+								$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
+							}
 
 							$result = mysqli_query($con, $query);
 
