@@ -87,7 +87,8 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
                                     <a name="backBtn" id="backBtn" class="btn btn-dark btn-block mt-3" href="indexUser.php" role="button">Kembali</a>
                                 </div>
                                 <div class="col-6">
-                                    <input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">
+                                    <!-- <input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3"> -->
+                                    <input type="button" name="submit" value="submit" class="btn btn-success btn-block mt-3" data-toggle="modal" data-target="#myModal"></input>
                                 </div>
                             </div>
                     <?php
@@ -99,5 +100,67 @@ $query = "SELECT * FROM events WHERE id_events = $id_events";
         </div>
     </div>
     <?php include 'footer.php';?>
+        <!-- Modal -->
+        <div class="modal fade p-5 ml-5" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Form Bukti Pembayaran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <label for="">No Rek Pengirim</label>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" class="" style="width:100%;" id="rekPengirim" placeholder="Rek Pengirim">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <label for="">Nama Pengirim</label>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" class="" style="width:100%;" id="namaPengirim" placeholder="Nama Pengirim">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <label for="">No Rekening</label>
+                        </div>
+                        <div class="col-7">
+                            <select class="" style="width:100%;" id="noRekening">
+                                <option value="1">BCA / 1741720021</option>
+                                <option value="2">BNI / 1741720021</option>
+                                <option value="3">Mandiri / 1741720021</option>
+                                <option value="4">BRI / 1741720021  </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <label for="">Jumlah</label>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" class="" style="width:100%;" id="jumlah" placeholder="Jumlah Tranfer">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <label for="">Bukti Tranfer</label>
+                        </div>
+                        <div class="col-7 btn-file">
+                            <input type="file" name="gambar">
+                        </div>
+                    </div>
+                    <input type="submit" name="submit" value="submit" class="btn btn-success btn-block mt-3">
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
