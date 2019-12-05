@@ -29,7 +29,7 @@ if (!empty($_POST["username"]) || !empty($_POST["password"])) {
                 $_SESSION["username"] = $username;
                 $_SESSION["idusers_level"] = $level;
                 $_SESSION["id_users"] = $idkategori;
-                header("Location: ../indexUser.php");
+                header("Location: ../index.php");
             }
         }
         else {

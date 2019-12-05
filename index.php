@@ -2,14 +2,13 @@
 include 'helper/koneksi.php';
 
 session_start();
-$_SESSION["idusers_level"] = null;
 
 if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 	if ($_SESSION['idusers_level'] == '1') {
 		header("location: admin/indexAdmin.php");
-	} else if ($_SESSION['idusers_level'] == '2') {
-		header("location: indexUser.php");
 	}
+} else {
+	header("location: login.php");
 }
 ?>
 
@@ -23,7 +22,7 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 </head>
 
 <body>
-	<?php include 'header.php' ?>
+	<?php include 'header.php'; ?>
 	<div class="container findEvent mt-3 mb-2">
 		<div class="row">
 			<div class="col-2"></div>
@@ -68,7 +67,6 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 					</form>
 				</div>
 
-				</form>
 			</div>
 			<div class="col-2"></div>
 		</div>
@@ -76,7 +74,6 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 
 	<div class="content-box">
 		<div class="wrap">
-			<form></form>
 			<div class="clear"></div>
 		</div>
 	</div>
@@ -84,45 +81,45 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 	<div class="container anyEvent">
 		<div class="row">
 			<?php
-			if(empty($_POST['search']) && empty($_POST['searchByName'])){
-				$cari = null;
-				$nama = null;
-			}else{
-				$cari = $_POST['search'];
-				$nama = $_POST['searchByName'];
-			}
-			
-			if(empty($_POST['searchByKategori']) && empty($_REQUEST['kategori'])){
-			  $kategori = null;
-			  $jenis = null;
-			} else {
-				$jenis = $_REQUEST['kategori'];
-				$kategori = $_POST['searchByKategori'];
-			}
+				if(empty($_POST['search']) && empty($_POST['searchByName'])){
+					$cari = null;
+					$nama = null;
+				}else{
+					$cari = $_POST['search'];
+					$nama = $_POST['searchByName'];
+				}
+
+
+				if(empty($_POST['searchByKategori']) && empty($_REQUEST['kategori'])){
+				  $kategori = null;
+				  $jenis = null;
+				} else {
+					$jenis = $_REQUEST['kategori'];
+					$kategori = $_POST['searchByKategori'];
+				}
 
 			// $query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
 
+			
+
+
 			if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 				// echo ("login");
-				$queryAi = "SELECT count(k.id_kategori) AS jumlah, k.id_kategori
-									FROM events AS
-									e
-									INNER JOIN
-									tiket AS t
-									ON
-									e.id_events = t.id_events
-									INNER JOIN
-									kategori AS k
-									ON
-									e.id_kategori = k.id_kategori
-									WHERE
-									t.id_users = 11
-									GROUP BY k.id_kategori
-									ORDER BY jumlah DESC";
+				$queryAi = "SELECT count(k.id_kategori) AS jumlah, k.id_kategori FROM events AS e INNER JOIN tiket AS t ON e.id_events = t.id_events INNER JOIN kategori AS k ON e.id_kategori = k.id_kategori WHERE t.id_users = " . $_SESSION["id_users"] . " GROUP BY k.id_kategori ORDER BY jumlah DESC";
+				
+				// if (isset($nama)) {
+				// 	$queryAi = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.judul_event LIKE '%{$cari}%' AND u.deleted = 0 AND e.deleted = 0";
+				// }
+				// // die(isset($kategori));
+				// else if (isset($kategori)) {
+				// 	$queryAi = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = $jenis AND u.deleted = 0 AND e.deleted = 0";
+				// } else {
+				// 	$queryAi = "SELECT count(k.id_kategori) AS jumlah, k.id_kategori FROM events AS e INNER JOIN tiket AS t ON e.id_events = t.id_events INNER JOIN kategori AS k ON e.id_kategori = k.id_kategori WHERE t.id_users = " . $_SESSION["id_users"] . " GROUP BY k.id_kategori ORDER BY jumlah DESC";
+				// }
+				
+				$resultAi = mysqli_query($con, $queryAi);
 
-				$resultAi = mysqli_query($con, $query);
-
-				if (mysqli_num_rows($result) > 0) {
+				if (mysqli_num_rows($resultAi) > 0) {
 					while ($rowAi = mysqli_fetch_assoc($resultAi)) {
 						$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = " . $rowAi["id_kategori"] . " AND u.deleted = 0 AND e.deleted = 0";
 						$result = mysqli_query($con, $query);
@@ -139,7 +136,7 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 												<div class="col-6">
 													<!-- <p class="month">Jan</p>
 												<p class="day">20</p> -->
-									 				<div class="eventTitle">
+													<div class="eventTitle">
 														<h2> <?php echo $row['judul_event']; ?> </h2>
 													</div>
 													<p class="time"><?php echo $row['tanggal_mulai']; ?>, <?php echo $row['waktu_mulai']; ?></p>
@@ -171,23 +168,13 @@ if (isset($_SESSION['username']) and isset($_SESSION['idusers_level'])) {
 
 							$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
 
-							if (isset($nama)) {
-								$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.judul_event LIKE '%{$cari}%' AND u.deleted = 0 AND e.deleted = 0";
-							}
-							// die(isset($kategori));
-							else if (isset($kategori)) {
-								$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE e.id_kategori = $jenis AND u.deleted = 0 AND e.deleted = 0";
-							} else {
-								$query = "SELECT e.*,u.* FROM events AS e INNER JOIN users AS u ON e.id_users = u.id_users WHERE u.deleted = 0 AND e.deleted = 0";
-							}
-
 							$result = mysqli_query($con, $query);
 
 							if (mysqli_num_rows($result) > 0) {
 								$card = 1;
 								while ($row = mysqli_fetch_assoc($result)) {
 									$id_events = $row["id_events"];
-						?>
+									?>
 						<div class="col-4">
 							<div class="card" style="width: 22rem;">
 								<?php echo " <a href='detailEvent.php?id=$id_events'><img class='card-img-top' src='gambar/" . $row['gambar_event'] . "' alt='Card image cap'></a>" ?>
